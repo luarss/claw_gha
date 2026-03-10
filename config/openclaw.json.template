@@ -44,6 +44,12 @@
         "gemini": {
           "apiKey": "${GEMINI_API_KEY}"
         }
+      },
+      "browser": {
+        "enabled": true,
+        "executablePath": "/usr/bin/chromium-browser",
+        "headless": false,
+        "noSandbox": true
       }
     }
   },
