@@ -1,7 +1,11 @@
 {
-  "agent": {
-    "model": "zai/glm-5",
-    "workspace": "$HOME/.openclaw/workspace"
+  "agents": {
+    "defaults": {
+      "model": {
+        "primary": "zai/glm-5"
+      },
+      "workspace": "$HOME/.openclaw/workspace"
+    }
   },
   "gateway": {
     "port": 18789,
