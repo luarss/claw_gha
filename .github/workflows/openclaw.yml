@@ -34,6 +34,7 @@ jobs:
       - name: Configure OpenClaw
         env:
           BAILIAN_API_KEY: ${{ secrets.BAILIAN_API_KEY }}
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
         run: |
           mkdir -p ~/.openclaw/workspace
           # Copy memory files to workspace
