@@ -48,7 +48,7 @@ jobs:
         env:
           MESSAGE: ${{ github.event.inputs.message || 'Check for updates and continue tasks' }}
         run: |
-          openclaw agent --message "$MESSAGE" --thinking high
+          openclaw agent --session-id stock-picker --message "$MESSAGE" --thinking high
 
       - name: Sync Memory Back
         run: |
