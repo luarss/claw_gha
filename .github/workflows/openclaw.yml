@@ -71,9 +71,9 @@ jobs:
           cp -r ~/.openclaw/workspace/* memory/ || true
 
       - name: Commit Memory Changes
-        run: |
-          git config user.name "OpenClaw Agent"
-          git config user.email "openclaw@users.noreply.github.com"
-          git add memory/
-          git diff --quiet && git diff --staged --quiet || git commit -m "chore: update memory [skip ci]"
-          git push
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: "chore: update memory [skip ci]"
+          commit_user_name: "OpenClaw Agent"
+          commit_user_email: "openclaw@users.noreply.github.com"
+          file_pattern: memory/
