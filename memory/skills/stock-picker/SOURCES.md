@@ -19,16 +19,17 @@ Trusted sources for stock analysis and how to use them effectively.
 - Financial statement data
 
 **How to Use**:
-- Use **web search** to find current data (avoids direct web_fetch which which 403)
-- Or use MCP web_reader tool which can fetch and parse content
-- Key metrics available via search results
+```
+1. Search ticker symbol
+2. Statistics tab → Key metrics
+3. Financials tab → Income statement, balance sheet, cash flow
+4. Analysis tab → Analyst estimates
+```
 
 **Limitations**:
-- **web_fetch blocked** by Zhipu AI security (403 SECURITY NOTICE)
 - Data may be delayed 15 minutes
 - Some international stocks limited
 - Occasional data errors (cross-reference)
-- Use web search as alternative for direct page fetching
 
 ---
 
@@ -339,6 +340,7 @@ Trusted sources for stock analysis and how to use them effectively.
 
 ## Data Verification Protocol
 
+### Price Data
 1. Primary source: Yahoo Finance
 2. Cross-check: FinViz or broker
 3. For trading: Use real-time source
@@ -357,16 +359,6 @@ Trusted sources for stock analysis and how to use them effectively.
 1. Primary source: Yahoo Finance (consensus)
 2. Cross-check: TipRanks, Zack's
 3. Consider: Historical accuracy
-
-## Known Limitations
-
-### web_fetch 403 Error
-Zhipu AI's API returns a **403 SECURITY NOTICE** when attempting to fetch from external URLs. This is a **built-in security feature**, not a bug.
-
-**Workarounds**:
-1. Use **web search** to find current data instead of direct page fetch
-2. Use **MCP web_reader** tool to fetch and convert content
-3. Use **Playwright browser tools** to navigate and extract content
 
 ---
 
