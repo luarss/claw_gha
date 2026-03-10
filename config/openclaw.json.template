@@ -37,6 +37,22 @@
       "workspace": "$HOME/.openclaw/workspace"
     }
   },
+  "tools": {
+    "web": {
+      "search": {
+        "provider": "gemini",
+        "gemini": {
+          "apiKey": "${GEMINI_API_KEY}"
+        }
+      },
+      "browser": {
+        "enabled": true,
+        "executablePath": "/usr/bin/chromium-browser",
+        "headless": false,
+        "noSandbox": true
+      }
+    }
+  },
   "gateway": {
     "port": 18789,
     "bind": "loopback"
