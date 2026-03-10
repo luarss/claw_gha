@@ -28,6 +28,14 @@ jobs:
         with:
           node-version: '22'
 
+      - name: Cache npm
+        uses: actions/cache@v4
+        with:
+          path: ~/.npm
+          key: openclaw-${{ runner.os }}-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            openclaw-${{ runner.os }}-
+
       - name: Install OpenClaw
         run: npm install -g openclaw@latest
 
@@ -45,7 +53,14 @@ jobs:
       - name: Start Gateway (background)
         run: |
           openclaw gateway --port 18789 &
-          sleep 5  # Wait for gateway to start
+          # Health check with timeout (replaces fixed sleep)
+          for i in {1..30}; do
+            if curl -s http://localhost:18789/health > /dev/null 2>&1; then
+              echo "Gateway ready after ${i} attempts"
+              break
+            fi
+            sleep 0.1
+          done
 
       - name: Run Agent
         env:
@@ -56,13 +71,18 @@ jobs:
 
       - name: Sync Memory Back
         run: |
-          # Copy updated memory back to repo
-          cp -r ~/.openclaw/workspace/* memory/ || true
+          # Sync updated memory back to repo (incremental)
+          rsync -a --delete ~/.openclaw/workspace/ memory/ 2>/dev/null || true
 
       - name: Commit Memory Changes
         run: |
           git config user.name "OpenClaw Agent"
           git config user.email "openclaw@users.noreply.github.com"
-          git add memory/
-          git diff --quiet && git diff --staged --quiet || git commit -m "chore: update memory [skip ci]"
-          git push
+          # Only commit if memory actually changed
+          if git diff --quiet memory/; then
+            echo "No memory changes to commit"
+          else
+            git add memory/
+            git commit -m "chore: update memory [skip ci]"
+            git push
+          fi
