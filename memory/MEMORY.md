@@ -9,6 +9,7 @@ This file persists across GitHub Actions runs. Use it to maintain analysis histo
 
 | Ticker | Added | Thesis Summary | Entry Zone | Target | Stop Loss | Status |
 |--------|-------|----------------|------------|--------|-----------|--------|
+| AMZN | 2026-03-10 | E-commerce + AWS + Ads, quality compounder at fair value | $200-215 | $260-280 | $185 | **BUY** |
 | NVDA | 2026-03-10 | AI infrastructure leader, exceptional growth | $160-170 | $250-280 | $145 | WATCHING |
 | AAPL | 2026-03-10 | Quality compounder, premium valuation | $230-240 | $300+ | $210 | WATCHING |
 
@@ -31,6 +32,7 @@ Record all predictions for quarterly review. Fill outcome after 3-6 months.
 ### 2026 Q1 Predictions
 | Date | Ticker | Call | Price | Target | Stop | Outcome | Notes |
 |------|--------|------|-------|--------|------|---------|-------|
+| 2026-03-10 | AMZN | **BUY** | $213.49 | $260-280 | $185 | | Diversified growth (AWS+Ads+Retail), fair 30x P/E, 31% earnings growth. 2:1+ risk-reward |
 | 2026-03-10 | NVDA | WATCH | $182.65 | $160-170 | $145 | | Exceptional growth, premium valuation. Wait for pullback to $160-170 |
 | 2026-03-10 | AAPL | WATCH | $259.88 | - | - | | Premium valuation, wait for pullback |
 
@@ -83,6 +85,16 @@ Record all predictions for quarterly review. Fill outcome after 3-6 months.
 - **Methodology Scores:** Value 4/10, Growth 8/10, Macro 6/10, Quant 6/10 → **Composite: 6/10**
 - **Risk-Reward:** Current ~1.5-2:1; at $160-170 entry improves to 2.5-3:1+
 
+### 2026-03-10 — AMZN (Amazon) — **NEW PICK**
+- **Price:** $213.49 | **P/E:** ~30x | **Market Cap:** ~$2.2T
+- **Q4 2025:** Revenue $213.4B (+13.6% YoY), Net Income $21.2B (+5.9% YoY)
+- **FY 2025:** Revenue $716.9B (+12.4% YoY), Net Income $77.7B (+31% YoY)
+- **Verdict:** **BUY** — Quality compounder at fair price. Entry $200-215, target $260-280.
+- **Catalysts:** AWS AI monetization, advertising scaling, international profitability
+- **Risks:** Consumer slowdown (highest), AWS competition, regulatory, margin compression
+- **Methodology Scores:** Value 6/10, Growth 7/10, Macro 7/10, Quant 6/10 → **Composite: 6.5/10**
+- **Risk-Reward:** ~2:1 at current levels, improves to 2.5-3:1 on pullback to $200-205
+
 ### 2026-03-10 — AAPL
 - **Price:** $259.88 | **P/E:** 32.88 | **Market Cap:** $3.82T
 - **Q4 2025:** Revenue $143.76B (+15.65%), Net Income $42.10B (+15.87%), FCF $43.64B (+169%)
@@ -112,4 +124,8 @@ Record all predictions for quarterly review. Fill outcome after 3-6 months.
 
 ## Last Run
 - **Date:** 2026-03-10
-- **Summary:** Full multi-methodology analysis of NVDA. Exceptional business with 65%+ revenue growth and 63% net margins. Valuation rich at 37-47x P/E. Watching for entry in $160-170 range (2.5-3:1+ risk-reward). Current price $182.65 offers only ~1.5-2:1.
+- **Summary:** Completed multi-methodology analysis on 3 mega-cap stocks:
+  - **AMZN: BUY** — New pick. Diversified growth (AWS+Ads+Retail), 30x P/E reasonable, 31% earnings growth. Entry $200-215, target $260-280, stop $185. Risk-reward ~2:1.
+  - **NVDA: WATCH** — Exceptional business (65% growth, 63% margins) but expensive (37-47x P/E). Wait for pullback to $160-170 for 2.5-3:1 risk-reward.
+  - **AAPL: WATCH** — Quality compounder but premium valuation (33x P/E). Better entry at $230-240.
+- **Portfolio Strategy:** Initiate AMZN position (3-5%), wait for better entries on NVDA/AAPL. Provides diversification across e-commerce/cloud, semis, and consumer tech.
