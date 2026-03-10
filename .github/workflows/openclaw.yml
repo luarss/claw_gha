@@ -8,7 +8,7 @@ on:
       message:
         description: 'Message to send to agent'
         required: true
-        default: 'Continue working on tasks'
+        default: 'Continue stock analysis and update picks'
 
 concurrency:
   group: openclaw-agent
@@ -60,7 +60,7 @@ jobs:
         env:
           DISPLAY: :99
           BAILIAN_API_KEY: ${{ secrets.BAILIAN_API_KEY }}
-          MESSAGE: ${{ github.event.inputs.message || 'Check for updates and continue tasks' }}
+          MESSAGE: ${{ github.event.inputs.message || 'Continue stock analysis and update picks' }}
         run: |
           sleep 2  # Wait for Xvfb to be ready
           openclaw agent --session-id stock-picker --message "$MESSAGE" --thinking high
