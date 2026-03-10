@@ -50,29 +50,11 @@ jobs:
           export HOME
           envsubst < config/openclaw.json.template > ~/.openclaw/openclaw.json
 
-      - name: Start Gateway (background)
-        run: |
-          openclaw gateway --port 18789 &
-          # Health check with timeout (replaces fixed sleep)
-          for i in {1..30}; do
-            if curl -s http://localhost:18789/health > /dev/null 2>&1; then
-              echo "Gateway ready after ${i} attempts"
-              break
-            fi
-            sleep 0.1
-          done
-
       - name: Run Agent
         env:
           BAILIAN_API_KEY: ${{ secrets.BAILIAN_API_KEY }}
           MESSAGE: ${{ github.event.inputs.message || 'Check for updates and continue tasks' }}
-        run: |
-          openclaw agent --session-id stock-picker --message "$MESSAGE" --thinking high
-
-      - name: Sync Memory Back
-        run: |
-          # Sync updated memory back to repo (incremental)
-          rsync -a --delete ~/.openclaw/workspace/ memory/ 2>/dev/null || true
+        run: ./scripts/run-agent.sh "$MESSAGE" --session-id stock-picker
 
       - name: Commit Memory Changes
         run: |
