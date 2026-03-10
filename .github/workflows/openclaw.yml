@@ -14,6 +14,9 @@ concurrency:
   group: openclaw-agent
   cancel-in-progress: false
 
+permissions:
+  contents: write
+
 jobs:
   run-agent:
     runs-on: ubuntu-latest
