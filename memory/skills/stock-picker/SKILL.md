@@ -23,7 +23,14 @@ This skill synthesizes four proven approaches with **equal emphasis**:
 ### Phase 1: Quick Screen (2 minutes)
 Purpose: Rapid viability check before deep analysis
 
-1. **Basic Health Check**
+1. **Parallel Data Fetch** — Fetch all essential sources simultaneously to minimize latency:
+   - Yahoo Finance: price, market cap, P/E, key statistics
+   - FinViz: visual snapshot, sector comparison
+   - SEC EDGAR: latest filing list (10-K, 10-Q, 8-K)
+
+   **Optimization**: Use multiple web_fetch calls in parallel when possible. See `SOURCES.md` for priority tiers.
+
+2. **Basic Health Check**
    - Market cap > $1B (avoid micro-caps)
    - Average daily volume > 1M shares
    - No imminent bankruptcy risk (current ratio > 1)

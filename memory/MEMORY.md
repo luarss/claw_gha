@@ -5,6 +5,21 @@ This file persists across GitHub Actions runs. Use it to maintain analysis histo
 
 ---
 
+## Memory Archival Protocol
+
+When this file exceeds **300 lines**, archive old analyses:
+
+1. Create `memory/archive/YYYY-MM.md` for the current month
+2. Move analysis entries older than 30 days to the archive
+3. Keep only: Watch List, Active Positions, current quarter's Prediction Log, and Lessons Learned
+4. Update this header with archive location
+
+**Current Archive**: None yet
+
+**Daily File Rotation**: Daily memory files older than 1 day should be summarized into a single entry to prevent unbounded growth.
+
+---
+
 ## Current Watch List
 
 | Ticker | Added | Thesis Summary | Entry Zone | Target | Stop Loss | Status |

@@ -4,6 +4,30 @@ Trusted sources for stock analysis and how to use them effectively.
 
 ---
 
+## Priority Tiers for Parallel Fetching
+
+To minimize latency, fetch sources by tier in parallel:
+
+### Tier 1 — Essential (Fetch First, In Parallel)
+Fetch these simultaneously at the start of analysis:
+- **Yahoo Finance** — Price, market cap, P/E, key statistics
+- **FinViz** — Visual snapshot, screening data, sector comparison
+
+### Tier 2 — Secondary (Parallel with Tier 1)
+Can be fetched alongside Tier 1 if needed:
+- **SEC EDGAR** — Latest filing list (10-K, 10-Q, 8-K)
+- **Seeking Alpha** — Analysis articles, earnings transcripts
+
+### Tier 3 — On-Demand Only
+Fetch only when specific data is needed:
+- **TipRanks** — Analyst ratings aggregation
+- **GuruFocus** — Value investing metrics, insider tracking
+- **Morningstar** — Fair value estimates, moat ratings
+
+**Parallel Strategy**: When analyzing a stock, initiate all Tier 1 and Tier 2 fetches simultaneously. Add Tier 3 sources only if the initial screen passes.
+
+---
+
 ## Financial Data Sources
 
 ### Yahoo Finance (Primary)
