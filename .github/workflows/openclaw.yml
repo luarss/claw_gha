@@ -1,0 +1,64 @@
+name: OpenClaw Agent
+
+on:
+  schedule:
+    - cron: '0 */6 * * *'  # Every 6 hours
+  workflow_dispatch:        # Manual trigger
+    inputs:
+      message:
+        description: 'Message to send to agent'
+        required: true
+        default: 'Continue working on tasks'
+
+concurrency:
+  group: openclaw-agent
+  cancel-in-progress: false
+
+jobs:
+  run-agent:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Install OpenClaw
+        run: npm install -g openclaw@latest
+
+      - name: Configure OpenClaw
+        env:
+          ZAI_API_KEY: ${{ secrets.ZAI_API_KEY }}
+        run: |
+          mkdir -p ~/.openclaw/workspace
+          # Copy memory files to workspace
+          cp -r memory/* ~/.openclaw/workspace/ || true
+          # Generate config from template
+          export HOME
+          envsubst < config/openclaw.json.template > ~/.openclaw/openclaw.json
+
+      - name: Start Gateway (background)
+        run: |
+          openclaw gateway --port 18789 &
+          sleep 5  # Wait for gateway to start
+
+      - name: Run Agent
+        env:
+          MESSAGE: ${{ github.event.inputs.message || 'Check for updates and continue tasks' }}
+        run: |
+          openclaw agent --message "$MESSAGE" --thinking high
+
+      - name: Sync Memory Back
+        run: |
+          # Copy updated memory back to repo
+          cp -r ~/.openclaw/workspace/* memory/ || true
+
+      - name: Commit Memory Changes
+        run: |
+          git config user.name "OpenClaw Agent"
+          git config user.email "openclaw@users.noreply.github.com"
+          git add memory/
+          git diff --quiet && git diff --staged --quiet || git commit -m "chore: update memory [skip ci]"
+          git push

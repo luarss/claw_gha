@@ -1,0 +1,10 @@
+{
+  "agent": {
+    "model": "zai/glm-5",
+    "workspace": "$HOME/.openclaw/workspace"
+  },
+  "gateway": {
+    "port": 18789,
+    "bind": "loopback"
+  }
+}
