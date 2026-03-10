@@ -33,7 +33,7 @@ jobs:
 
       - name: Configure OpenClaw
         env:
-          ZAI_API_KEY: ${{ secrets.ZAI_API_KEY }}
+          BAILIAN_API_KEY: ${{ secrets.BAILIAN_API_KEY }}
         run: |
           mkdir -p ~/.openclaw/workspace
           # Copy memory files to workspace
@@ -49,7 +49,7 @@ jobs:
 
       - name: Run Agent
         env:
-          ZAI_API_KEY: ${{ secrets.ZAI_API_KEY }}
+          BAILIAN_API_KEY: ${{ secrets.BAILIAN_API_KEY }}
           MESSAGE: ${{ github.event.inputs.message || 'Check for updates and continue tasks' }}
         run: |
           openclaw agent --session-id stock-picker --message "$MESSAGE" --thinking high
