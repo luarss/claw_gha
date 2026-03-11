@@ -1,4 +1,10 @@
 {
+  "browser": {
+    "enabled": true,
+    "executablePath": "/usr/bin/chromium-browser",
+    "headless": false,
+    "noSandbox": true
+  },
   "models": {
     "mode": "merge",
     "providers": {
