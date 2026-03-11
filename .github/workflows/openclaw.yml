@@ -114,6 +114,7 @@ jobs:
           fi
 
       - name: Commit Memory Changes
+        if: github.ref == 'refs/heads/main'
         uses: stefanzweifel/git-auto-commit-action@v5
         with:
           commit_message: "chore: update memory [skip ci]"
