@@ -51,6 +51,7 @@ jobs:
         env:
           BAILIAN_API_KEY: ${{ secrets.BAILIAN_API_KEY }}
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          GATEWAY_PORT: 18789
         run: |
           mkdir -p ~/.openclaw/workspace
           # Copy memory files to workspace (with proper error handling)
