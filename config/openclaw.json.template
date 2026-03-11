@@ -61,5 +61,31 @@
   "env": {
     "FINNHUB_API_KEY": "${FINNHUB_API_KEY}",
     "FINANCIALDATA_API_KEY": "${FINANCIALDATA_API_KEY}"
+  },
+  "plugins": {
+    "allow": ["diagnostics-otel"],
+    "entries": {
+      "diagnostics-otel": {
+        "enabled": true
+      }
+    }
+  },
+  "diagnostics": {
+    "enabled": true,
+    "flags": ["*"],
+    "otel": {
+      "enabled": true,
+      "endpoint": "${OTEL_ENDPOINT}",
+      "protocol": "http/protobuf",
+      "serviceName": "openclaw-stock-picker",
+      "traces": true,
+      "metrics": true,
+      "logs": false,
+      "sampleRate": 1.0,
+      "flushIntervalMs": 30000,
+      "headers": {
+        "x-honeycomb-team": "${HONEYCOMB_API_KEY}"
+      }
+    }
   }
 }

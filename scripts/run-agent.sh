@@ -3,6 +3,11 @@ set -e
 
 MESSAGE="${1:-Check for updates and continue tasks}"
 
+# OpenTelemetry configuration for local testing
+# Defaults to localhost Jaeger collector
+export OTEL_ENDPOINT="${OTEL_ENDPOINT:-http://localhost:4318}"
+export OPENCLAW_DIAGNOSTICS="${OPENCLAW_DIAGNOSTICS:-*}"
+
 # Ensure gateway is running
 if ! pgrep -f "openclaw gateway" > /dev/null; then
     echo "Starting OpenClaw gateway..."

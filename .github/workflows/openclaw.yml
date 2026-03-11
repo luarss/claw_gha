@@ -19,6 +19,9 @@ permissions:
 
 env:
   FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+  OTEL_ENDPOINT: ${{ secrets.OTEL_ENDPOINT }}
+  OTEL_EXPORTER_OTLP_ENDPOINT: ${{ secrets.OTEL_ENDPOINT }}
+  OTEL_SERVICE_NAME: openclaw-stock-picker-gha
 
 jobs:
   run-agent:
@@ -55,6 +58,7 @@ jobs:
           BAILIAN_API_KEY: ${{ secrets.BAILIAN_API_KEY }}
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
           FINNHUB_API_KEY: ${{ secrets.FINNHUB_API_KEY }}
+          HONEYCOMB_API_KEY: ${{ secrets.HONEYCOMB_API_KEY }}
           GATEWAY_PORT: 18789
         run: |
           mkdir -p ~/.openclaw/workspace
@@ -111,3 +115,11 @@ jobs:
           commit_user_name: "OpenClaw Agent"
           commit_user_email: "openclaw@users.noreply.github.com"
           file_pattern: memory/
+
+      - name: Upload Diagnostic Logs
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: openclaw-logs-${{ github.run_id }}
+          path: /tmp/openclaw/openclaw-*.log
+          retention-days: 7
