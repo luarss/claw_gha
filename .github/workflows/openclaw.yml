@@ -35,7 +35,12 @@ jobs:
           node-version: '22'
 
       - name: Install OpenClaw
-        run: npm install -g openclaw@latest
+        run: |
+          # Install to user-level directory to avoid world-writable plugin paths
+          mkdir -p ~/.npm-global
+          npm config set prefix '~/.npm-global'
+          echo "$HOME/.npm-global/bin" >> $GITHUB_PATH
+          npm install -g openclaw@latest
 
       - name: Install Xvfb and Chrome
         run: |
