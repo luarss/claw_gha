@@ -4,9 +4,53 @@ Trusted sources for stock analysis and how to use them effectively.
 
 ---
 
+## Live Pricing Sources
+
+### Finnhub (Primary for Real-Time Prices)
+**URL**: finnhub.io
+**Skill Reference**: `live-pricing/SKILL.md`
+
+**Strengths**:
+- Real-time stock quotes via API (60 calls/min free tier)
+- No credit card required for free tier
+- Simple REST API with clean JSON responses
+- Reliable uptime and fast response times
+
+**Best For**:
+- Phase 0: Data freshness checks
+- Real-time price data
+- Batch quote fetching
+- Programmatic integration
+
+**API Setup**:
+1. Sign up at finnhub.io
+2. Get API key from dashboard
+3. Set `FINNHUB_API_KEY` in `.env`
+
+**Quick Usage**:
+```bash
+curl "https://finnhub.io/api/v1/quote?symbol=AAPL&token=$FINNHUB_API_KEY"
+```
+
+**Response Fields**:
+| Field | Meaning |
+|-------|---------|
+| `c` | Current price |
+| `d` | Change |
+| `dp` | Change percent |
+| `h` | Day high |
+| `l` | Day low |
+| `pc` | Previous close |
+
+**Limitations**:
+- Free tier: 60 calls/minute
+- US market focus
+
+---
+
 ## Financial Data Sources
 
-### Yahoo Finance (Primary)
+### Yahoo Finance (Primary for Fundamentals)
 **URL**: finance.yahoo.com
 **Strengths**:
 - Free, comprehensive financial data
