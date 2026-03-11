@@ -44,7 +44,7 @@ jobs:
           echo "NODE_PATH=$HOME/.npm-global/lib/node_modules" >> $GITHUB_ENV
           npm install -g openclaw@latest
           # Install OpenTelemetry dependencies for diagnostics-otel plugin
-          npm install -g @opentelemetry/api @opentelemetry/api-logs @opentelemetry/sdk-node @opentelemetry/sdk-metrics @opentelemetry/sdk-logs @opentelemetry/resources @opentelemetry/semantic-conventions @opentelemetry/exporter-trace-otlp-proto @opentelemetry/exporter-metrics-otlp-proto @opentelemetry/exporter-logs-otlp-proto
+          npm install -g @opentelemetry/api @opentelemetry/api-logs @opentelemetry/sdk-node @opentelemetry/sdk-metrics @opentelemetry/sdk-logs @opentelemetry/sdk-trace-base @opentelemetry/resources @opentelemetry/semantic-conventions @opentelemetry/exporter-trace-otlp-proto @opentelemetry/exporter-metrics-otlp-proto @opentelemetry/exporter-logs-otlp-proto
 
       - name: Install Xvfb and Chrome
         run: |
