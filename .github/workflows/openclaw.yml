@@ -19,6 +19,9 @@ permissions:
 
 env:
   FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+  OTEL_ENDPOINT: ${{ secrets.OTEL_ENDPOINT }}
+  OTEL_EXPORTER_OTLP_ENDPOINT: ${{ secrets.OTEL_ENDPOINT }}
+  OTEL_SERVICE_NAME: openclaw-stock-picker-gha
 
 jobs:
   run-agent:
@@ -32,7 +35,16 @@ jobs:
           node-version: '22'
 
       - name: Install OpenClaw
-        run: npm install -g openclaw@latest
+        run: |
+          # Install to user-level directory to avoid world-writable plugin paths
+          mkdir -p ~/.npm-global
+          npm config set prefix '~/.npm-global'
+          echo "$HOME/.npm-global/bin" >> $GITHUB_PATH
+          # Set NODE_PATH so plugins can find globally installed dependencies
+          echo "NODE_PATH=$HOME/.npm-global/lib/node_modules" >> $GITHUB_ENV
+          npm install -g openclaw@latest
+          # Install OpenTelemetry dependencies for diagnostics-otel plugin
+          npm install -g @opentelemetry/api @opentelemetry/api-logs @opentelemetry/sdk-node @opentelemetry/sdk-metrics @opentelemetry/sdk-logs @opentelemetry/sdk-trace-base @opentelemetry/resources @opentelemetry/semantic-conventions @opentelemetry/exporter-trace-otlp-proto @opentelemetry/exporter-metrics-otlp-proto @opentelemetry/exporter-logs-otlp-proto
 
       - name: Install Xvfb and Chrome
         run: |
@@ -55,6 +67,7 @@ jobs:
           BAILIAN_API_KEY: ${{ secrets.BAILIAN_API_KEY }}
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
           FINNHUB_API_KEY: ${{ secrets.FINNHUB_API_KEY }}
+          HONEYCOMB_API_KEY: ${{ secrets.HONEYCOMB_API_KEY }}
           GATEWAY_PORT: 18789
         run: |
           mkdir -p ~/.openclaw/workspace
@@ -105,9 +118,18 @@ jobs:
           fi
 
       - name: Commit Memory Changes
+        if: github.ref == 'refs/heads/main'
         uses: stefanzweifel/git-auto-commit-action@v5
         with:
           commit_message: "chore: update memory [skip ci]"
           commit_user_name: "OpenClaw Agent"
           commit_user_email: "openclaw@users.noreply.github.com"
           file_pattern: memory/
+
+      - name: Upload Diagnostic Logs
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: openclaw-logs-${{ github.run_id }}
+          path: /tmp/openclaw/openclaw-*.log
+          retention-days: 7
