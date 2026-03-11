@@ -270,3 +270,211 @@ finnhub_client = finnhub.Client(api_key="YOUR_API_KEY")
 
 print(finnhub_client.quote('AAPL'))
 ```
+
+---
+
+# financialdata.net API Reference
+
+Base URL: `https://api.financialdata.net/api/v0`
+
+Authentication: Pass API key as `token` query parameter
+
+**Note:** Free tier provides delayed market data (~15 min delay). Real-time data requires Premium subscription.
+
+---
+
+## Endpoints
+
+### Intraday Quote (Free Tier)
+
+```
+GET /intraday/{SYMBOL}?token={API_KEY}
+```
+
+**Parameters:**
+| Name | Type | Required | Description |
+|------|------|----------|-------------|
+| symbol | string | Yes | Stock ticker (e.g., AAPL, MSFT) |
+| token | string | Yes | Your API key |
+
+**Response:**
+```json
+{
+  "symbol": "AAPL",
+  "price": 175.50,
+  "change": 2.30,
+  "changePercent": 1.33,
+  "high": 176.00,
+  "low": 173.20,
+  "open": 173.50,
+  "previousClose": 173.20,
+  "timestamp": "2026-03-11T20:00:00"
+}
+```
+
+**Example:**
+```bash
+curl "https://api.financialdata.net/api/v0/intraday/AAPL?token=$FINANCIALDATA_API_KEY"
+```
+
+---
+
+### Historical Daily Prices
+
+```
+GET /historical/{SYMBOL}?token={API_KEY}
+```
+
+**Parameters:**
+| Name | Type | Required | Description |
+|------|------|----------|-------------|
+| symbol | string | Yes | Stock ticker |
+| token | string | Yes | Your API key |
+
+**Response:**
+```json
+{
+  "symbol": "AAPL",
+  "historical": [
+    {
+      "date": "2026-03-11",
+      "open": 173.50,
+      "high": 176.00,
+      "low": 173.20,
+      "close": 175.50,
+      "volume": 50000000
+    },
+    {
+      "date": "2026-03-10",
+      "open": 172.00,
+      "high": 174.50,
+      "low": 171.50,
+      "close": 173.20,
+      "volume": 48000000
+    }
+  ]
+}
+```
+
+**Example:**
+```bash
+curl "https://api.financialdata.net/api/v0/historical/AAPL?token=$FINANCIALDATA_API_KEY"
+```
+
+---
+
+### Quote with Full Details (Premium)
+
+```
+GET /quote/{SYMBOL}?token={API_KEY}
+```
+
+Returns comprehensive quote data including bid/ask prices, market cap, P/E ratio, etc.
+
+---
+
+### Crypto Prices
+
+```
+GET /crypto/{SYMBOL}/price?token={API_KEY}
+```
+
+**Example:**
+```bash
+# Get Bitcoin price
+curl "https://api.financialdata.net/api/v0/crypto/BTC-USD/price?token=$FINANCIALDATA_API_KEY"
+```
+
+---
+
+## Rate Limits
+
+| Plan | Calls/Day | Data Type |
+|------|-----------|-----------|
+| Free | 300 | Delayed (~15 min) |
+| Standard+ | 3,000 | Intraday + Intl stocks |
+| Premium | Unlimited | Real-time |
+
+---
+
+## Error Responses
+
+| Status Code | Meaning |
+|-------------|---------|
+| 200 | Success |
+| 400 | Bad Request — Invalid parameters |
+| 401 | Unauthorized — Invalid API key |
+| 404 | Not Found — Symbol not found |
+| 429 | Too Many Requests — Rate limit exceeded |
+| 500 | Internal Server Error |
+
+**Error Response Format:**
+```json
+{
+  "error": "Invalid API key"
+}
+```
+
+---
+
+## Best Practices
+
+### Delayed Data Consideration
+```javascript
+// financialdata.net free tier provides delayed data (~15 min)
+function isDelayedData(timestamp) {
+  const now = new Date();
+  const quoteTime = new Date(timestamp);
+  const ageMinutes = (now - quoteTime) / (1000 * 60);
+  return ageMinutes > 15; // Data is delayed if > 15 min old
+}
+
+// Use accordingly in analysis
+const quote = await getFDQuote(symbol);
+if (isDelayedData(quote.timestamp)) {
+  console.log('Note: Using delayed data');
+}
+```
+
+### Fallback Pattern
+```javascript
+async function getQuoteWithFallback(symbol) {
+  // Try Finnhub first (real-time)
+  const finnhubQuote = await getFinnhubQuote(symbol);
+  if (finnhubQuote.success) {
+    return { ...finnhubQuote, source: 'Finnhub' };
+  }
+
+  // Fall back to financialdata.net
+  console.log('Finnhub failed, trying backup...');
+  const fdQuote = await getFDQuote(symbol);
+  if (fdQuote.success) {
+    return { ...fdQuote, source: 'financialdata.net (delayed)' };
+  }
+
+  throw new Error('All providers failed');
+}
+```
+
+### Batch Requests
+```javascript
+// Fetch multiple symbols with rate limit awareness
+async function getQuotesFD(symbols) {
+  const results = [];
+  for (const symbol of symbols) {
+    try {
+      const response = await fetch(
+        `https://api.financialdata.net/api/v0/intraday/${symbol}?token=${API_KEY}`
+      );
+      const data = await response.json();
+      results.push({ symbol, ...data, success: true });
+    } catch (error) {
+      results.push({ symbol, error: error.message, success: false });
+    }
+
+    // Respect rate limits (300/day)
+    await new Promise(r => setTimeout(r, 500));
+  }
+  return results;
+}
+```

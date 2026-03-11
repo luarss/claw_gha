@@ -59,6 +59,7 @@
     "bind": "loopback"
   },
   "env": {
-    "FINNHUB_API_KEY": "${FINNHUB_API_KEY}"
+    "FINNHUB_API_KEY": "${FINNHUB_API_KEY}",
+    "FINANCIALDATA_API_KEY": "${FINANCIALDATA_API_KEY}"
   }
 }
