@@ -40,6 +40,8 @@ jobs:
           mkdir -p ~/.npm-global
           npm config set prefix '~/.npm-global'
           echo "$HOME/.npm-global/bin" >> $GITHUB_PATH
+          # Set NODE_PATH so plugins can find globally installed dependencies
+          echo "NODE_PATH=$HOME/.npm-global/lib/node_modules" >> $GITHUB_ENV
           npm install -g openclaw@latest
           # Install OpenTelemetry dependencies for diagnostics-otel plugin
           npm install -g @opentelemetry/api @opentelemetry/api-logs @opentelemetry/sdk-node @opentelemetry/sdk-metrics @opentelemetry/sdk-logs @opentelemetry/resources @opentelemetry/semantic-conventions @opentelemetry/exporter-trace-otlp-proto @opentelemetry/exporter-metrics-otlp-proto @opentelemetry/exporter-logs-otlp-proto
