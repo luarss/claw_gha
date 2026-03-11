@@ -20,6 +20,35 @@ This skill synthesizes four proven approaches with **equal emphasis**:
 
 ## Analysis Workflow
 
+### Phase 0: Data Freshness Check (1 minute)
+**CRITICAL: Do this before any analysis**
+
+Before proceeding, verify data is current:
+
+1. **Price Data Timestamp**
+   - Price must be from current trading day (or prior close if pre-market)
+   - If price is > 1 trading day old: HALT and fetch fresh data
+
+2. **Financial Data Age**
+   - 10-Q data: Should be < 90 days old
+   - 10-K data: Should be < 365 days old
+   - If data is stale: Note limitation in analysis
+
+3. **News Recency**
+   - Check for material news in last 24 hours
+   - Earnings, guidance, M&A can invalidate prior analysis
+
+**Data Quality Log Format:**
+```
+### Data Quality Check — [YYYY-MM-DD HH:MM UTC]
+- Price: $X.XX (as of [timestamp])
+- Financials: 10-Q dated [date]
+- News scan: [clear/material news found]
+- FRESHNESS: [PASS/STALE/RETRY]
+```
+
+---
+
 ### Phase 1: Quick Screen (2 minutes)
 Purpose: Rapid viability check before deep analysis
 
@@ -111,7 +140,12 @@ Key indicators:
 
 **Output Format:**
 ```
-## [TICKER] Analysis — [DATE]
+## [TICKER] Analysis — [YYYY-MM-DD HH:MM UTC]
+
+### Data Quality
+- Price timestamp: [source, time]
+- Financials source: [filing date]
+- Freshness: [PASS/STALE]
 
 ### Quick Stats
 - Price: $X | Market Cap: $XB | P/E: X | PEG: X
@@ -146,6 +180,44 @@ Key indicators:
 ### Position Sizing
 - Conviction: [High/Medium/Low]
 - Suggested Max: X% of portfolio
+
+### Confidence & Sources
+- Data confidence: [High/Medium/Low]
+- Key sources: [list with timestamps]
+- Metrics requiring verification: [list any uncertain values]
+```
+
+---
+
+### Phase 5: Output Validation
+**After generating analysis, perform self-check:**
+
+1. **Number Cross-Check**
+   - P/E × EPS ≈ Stock Price (within 5%)
+   - Market Cap ≈ Price × Shares Outstanding
+   - EV ≈ Market Cap + Debt - Cash
+
+2. **Source Attribution**
+   - Every specific number must have a source
+   - If source is uncertain: Flag as "requires verification"
+   - Never fabricate or guess financial metrics
+
+3. **Confidence Scoring**
+   - High: Data from primary sources (SEC, company IR)
+   - Medium: Data from aggregators (Yahoo, FinViz)
+   - Low: Data from secondary sources or estimates
+
+4. **Hallucination Check**
+   - Are P/E, P/B, P/S internally consistent?
+   - Does growth rate match historical trends?
+   - Are margins reasonable for the industry?
+
+**Validation Output:**
+```
+### Validation — [PASS/FAIL]
+- Cross-check: [OK/ISSUES]
+- Unverified metrics: [list or "none"]
+- Confidence: [H/M/L]
 ```
 
 ---

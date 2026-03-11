@@ -36,6 +36,11 @@ PEG = P/E Ratio / EPS Growth Rate (%)
 - PEG 1.5-2.0: Slightly overvalued
 - PEG > 2.0: Overvalued
 
+**Edge Cases & Warnings:**
+- **Zero growth**: PEG undefined when growth = 0%. Use P/E alone or compare to industry P/E.
+- **Negative growth**: PEG becomes negative, which is misleading. Do NOT use PEG for declining businesses.
+- **Hypergrowth (>50%)**: PEG understates value. Use P/S or EV/Revenue instead.
+
 **Example:**
 - Stock with P/E 30 growing at 30% = PEG 1.0 (fair)
 - Stock with P/E 30 growing at 15% = PEG 2.0 (expensive)
@@ -134,6 +139,16 @@ Where:
 2. Calculate terminal value (FCF × (1+g) / (r-g))
 3. Discount all to present value
 4. Divide by shares outstanding
+
+**Terminal Value Formula Constraints:**
+```
+Terminal Value = FCF × (1+g) / (r - g)
+
+CRITICAL: This formula is undefined when r = g
+- If r ≈ g (within 1%): Use perpetuity formula FCF/r instead
+- If g > r: Model is invalid (growth exceeds required return indefinitely)
+- Conservative practice: Cap g at 3-4% (long-term GDP growth)
+```
 
 **Margin of Safety:**
 - Buy if market price is 25%+ below intrinsic value
@@ -249,6 +264,31 @@ Look for:
 - Consistent growth (not erratic)
 - Growth from operations (not one-time gains)
 - Earnings quality (cash conversion)
+
+---
+
+## Boundary Zone Guidelines
+
+Hard thresholds create arbitrary decisions at boundaries. Use 10% tolerance zones:
+
+**How to Apply:**
+- **Within 10% of threshold**: Treat as "borderline" - require confirming signals from other metrics
+- **Multiple metrics near thresholds**: Lower conviction, reduce position size
+- **Clear signal (far from boundaries)**: Higher conviction allowed
+
+**Example Boundary Zones:**
+| Metric | Undervalued Zone | Boundary Zone | Overvalued Zone |
+|--------|------------------|---------------|-----------------|
+| P/E | < 13.5 | 13.5-16.5 | > 44 |
+| PEG | < 0.9 | 0.9-1.1 | > 2.2 |
+| EV/EBITDA | < 7.2 | 7.2-8.8 | > 16.5 |
+
+**Boundary Decision Rule:**
+When a metric falls in a boundary zone (±10% of threshold):
+1. Check 2+ other valuation metrics for confirmation
+2. If confirmed: Proceed with standard interpretation
+3. If mixed: Reduce position size by 50% or wait for better entry
+4. If contradictory: Skip or mark as "WATCH"
 
 ---
 

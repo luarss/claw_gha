@@ -9,7 +9,8 @@ This project runs an AI-powered stock picker agent on GitHub Actions infrastruct
 ## Prerequisites
 
 - Node.js ≥22
-- Z.AI API key (for GLM-5 model)
+- Alibaba Cloud Bailian API key (for Qwen models)
+- Google Gemini API key (for web search)
 
 ## Repository Structure
 
@@ -17,14 +18,26 @@ This project runs an AI-powered stock picker agent on GitHub Actions infrastruct
 claw_gha/
 ├── .github/
 │   └── workflows/
-│       └── openclaw.yml          # Main workflow
+│       ├── openclaw.yml          # Main workflow
+│       └── test.yml              # Validation tests
 ├── memory/                        # Persisted memory
 │   ├── MEMORY.md                 # Main memory file
 │   ├── SOUL.md                   # Agent persona
+│   ├── AGENTS.md                 # Workspace guide
+│   ├── HEARTBEAT.md              # Periodic check config
+│   ├── IDENTITY.md               # Agent identity
+│   ├── TOOLS.md                  # Tool configuration
+│   ├── USER.md                   # User profile
 │   └── skills/
 │       └── stock-picker/
-│           └── SKILL.md          # Stock picker skill
+│           ├── SKILL.md          # Stock picker skill
+│           ├── VALUATION.md      # Valuation formulas
+│           ├── CHECKLISTS.md     # Analysis checklists
+│           ├── REDFLAGS.md       # Warning signs
+│           ├── TERMINOLOGY.md    # Financial terms
+│           └── SOURCES.md        # Data sources
 ├── scripts/
+│   ├── sync-memory.sh            # Memory sync utility
 │   ├── setup.sh                  # Install & configure
 │   └── run-agent.sh              # Execute agent
 ├── config/
@@ -34,12 +47,13 @@ claw_gha/
 
 ## Setup
 
-### 1. Add GitHub Secret
+### 1. Add GitHub Secrets
 
-Add your Z.AI API key as a repository secret:
+Add your API keys as repository secrets:
 
 1. Go to Settings → Secrets and variables → Actions
-2. Add secret: `ZAI_API_KEY` with your API key value
+2. Add secret: `BAILIAN_API_KEY` with your Alibaba Cloud Bailian API key
+3. Add secret: `GEMINI_API_KEY` with your Google Gemini API key
 
 ### 2. Enable Workflows
 
@@ -64,7 +78,7 @@ openclaw gateway --port 18789 &
 sleep 3
 
 # Run agent
-openclaw agent --message "Analyze AAPL stock" --model zai/glm-5
+openclaw agent --message "Analyze AAPL stock" --model bailian/qwen3.5-plus
 ```
 
 ## Memory Persistence
@@ -81,7 +95,7 @@ After each run, updated memory is committed back to the repository with `[skip c
 
 Edit `config/openclaw.json.template` to customize:
 
-- Model selection (default: `zai/glm-5`)
+- Model selection (default: `bailian/qwen3.5-plus`)
 - Gateway port (default: 18789)
 - Workspace location
 
@@ -117,5 +131,5 @@ Edit `memory/SOUL.md` to change the agent's behavior and communication style.
 - Verify git credentials are configured
 
 ### API errors
-- Verify `ZAI_API_KEY` secret is set correctly
+- Verify `BAILIAN_API_KEY` and `GEMINI_API_KEY` secrets are set correctly
 - Check API usage limits

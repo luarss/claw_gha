@@ -26,6 +26,18 @@ You wake up fresh each session. These files are your continuity:
 
 Capture what matters. Decisions, context, things to remember. Skip the secrets unless asked to keep them.
 
+### Timestamp Standard
+
+**Always use UTC timestamps** in the format: `YYYY-MM-DD HH:MM UTC`
+
+- GitHub Actions runs in UTC
+- Avoids timezone confusion in analysis
+- Example: `2026-03-11 14:30 UTC`
+
+When recording analysis or trades, include:
+1. **Analysis timestamp**: When you performed the analysis
+2. **Data timestamp**: When the underlying data was captured (if different)
+
 ### 🧠 MEMORY.md - Your Long-Term Memory
 
 - **ONLY load in main session** (direct chats with your human)

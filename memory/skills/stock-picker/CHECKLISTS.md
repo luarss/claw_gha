@@ -4,6 +4,38 @@ Quick-reference checklists for each investment methodology.
 
 ---
 
+## Data Quality Checklist (Do First)
+
+Before any analysis, verify data integrity:
+
+- [ ] **Price data is current** (today or prior close)
+- [ ] **Financial statement age** (< 90 days for quarterly, < 365 for annual)
+- [ ] **No material news** in last 24h that changes thesis
+- [ ] **Price verified** from 2+ sources (Yahoo + FinViz/broker)
+- [ ] **Key metrics verified** against primary source (SEC filing or company IR)
+- [ ] **Timestamp recorded**: Analysis timestamp in UTC format
+
+**If data is stale**: Note limitation prominently, consider delaying analysis
+
+---
+
+## Boundary Zone Checklist
+
+When metrics fall within 10% of thresholds:
+
+- [ ] **Identify boundary cases**: List metrics within tolerance zones
+- [ ] **Seek confirmation**: Do 2+ other metrics agree?
+- [ ] **Reduce if mixed**: Cut position size 50% for conflicting signals
+- [ ] **Wait if uncertain**: Better entry points exist
+
+**Example**: P/E = 16 (boundary of 15 threshold)
+- Check PEG, P/B, EV/EBITDA for confirmation
+- If 2+ confirm "undervalued": Proceed
+- If mixed: Reduce conviction, smaller position
+- If most say "overvalued": Skip
+
+---
+
 ## Value Investing Checklist (Buffett Style)
 
 ### Economic Moat Assessment
@@ -203,7 +235,9 @@ Mean Reversion Screen:
 
 Before executing any trade:
 
-- [ ] Thesis documented in MEMORY.md
+- [ ] **Data freshness verified** (price current, financials < 90 days)
+- [ ] **Output validation passed** (numbers cross-checked)
+- [ ] Thesis documented in MEMORY.md with UTC timestamp
 - [ ] Entry price defined
 - [ ] Stop loss price defined
 - [ ] Price target defined
@@ -213,6 +247,7 @@ Before executing any trade:
 - [ ] Alternative viewpoints considered
 - [ ] "What could go wrong" scenarios listed
 - [ ] Timeline for thesis to play out defined
+- [ ] Boundary zones handled appropriately
 
 ---
 
@@ -220,8 +255,23 @@ Before executing any trade:
 
 After executing a trade:
 
-- [ ] Record entry in MEMORY.md with timestamp
+- [ ] Record entry in MEMORY.md with UTC timestamp (YYYY-MM-DD HH:MM UTC)
+- [ ] Document data sources used
 - [ ] Set price alerts for target and stop
 - [ ] Schedule thesis review (monthly)
 - [ ] Note any catalysts to watch
 - [ ] Define conditions that would trigger exit early
+
+---
+
+## Output Validation Checklist
+
+Before finalizing any analysis:
+
+- [ ] **Number sanity check**: P/E × EPS ≈ Price (within 5%)
+- [ ] **Market cap sanity**: Price × Shares ≈ Market Cap
+- [ ] **EV sanity**: Market Cap + Debt - Cash ≈ EV
+- [ ] **All numbers sourced**: Every metric has attribution
+- [ ] **Unverified items flagged**: Uncertain values clearly marked
+- [ ] **Confidence assigned**: High/Medium/Low based on source quality
+- [ ] **No hallucinations**: Metrics consistent with industry norms
