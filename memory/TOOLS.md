@@ -11,6 +11,7 @@ Things like:
 - Preferred voices for TTS
 - Speaker/room names
 - Device nicknames
+- API keys and configuration
 - Anything environment-specific
 
 ## Examples
@@ -34,6 +35,21 @@ Things like:
 ## Why Separate?
 
 Skills are shared. Your setup is yours. Keeping them apart means you can update skills without losing your notes, and share skills without leaking your infrastructure.
+
+---
+
+## API Configuration
+
+### Finnhub (Live Stock Prices)
+- **Purpose:** Real-time stock quotes for analysis
+- **Free Tier:** 60 calls/min, 60K/month
+- **Key Location:** Environment variable `FINNHUB_API_KEY`
+- **Setup:** See `skills/live-pricing/SETUP.md`
+- **Scripts:**
+  - `skills/live-pricing/fetch-quote.js` (Node.js)
+  - `skills/live-pricing/fetch-quote.sh` (Shell)
+  - `skills/live-pricing/fetch_quote.py` (Python)
+- **Usage:** `./skills/live-pricing/fetch-quote.sh AAPL MSFT`
 
 ---
 
