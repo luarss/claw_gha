@@ -139,12 +139,6 @@ For each selected sector:
 
 ## Writing to Research Queue
 
-### IMPORTANT: File Format Rules
-- **ONLY** write to `../research-queue.md` (markdown format)
-- **DO NOT** create new files (e.g., `signal_queue.json`, `signals.json`)
-- **DO NOT** change the file format from markdown to JSON or any other format
-- Follow the existing structure in `research-queue.md`
-
 ### Format
 Append to `../research-queue.md` under `## Entries`:
 
@@ -206,10 +200,6 @@ Examples:
 
 ## Error Handling
 
-### Wrong File Format
-- If you created a new file (JSON, etc.), delete it
-- Use only `research-queue.md` in markdown format
-
 ### Data Unavailable
 - Note "DATA LIMITATION" in signal
 - Proceed with available data
@@ -236,7 +226,6 @@ Before submitting session output:
 - [ ] Fetched live prices for analyzed stocks
 - [ ] Generated signals only for qualifying setups
 - [ ] No duplicate signals in queue
-- [ ] Updated research-queue.md correctly (markdown, not JSON)
-- [ ] Did NOT create any new files (only update existing ones)
+- [ ] Updated research-queue.md correctly
 - [ ] Updated MEMORY.md with session log
 - [ ] Timestamps in UTC format
