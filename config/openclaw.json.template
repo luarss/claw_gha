@@ -2,7 +2,7 @@
   "browser": {
     "enabled": true,
     "executablePath": "/usr/bin/chromium-browser",
-    "headless": false,
+    "headless": true,
     "noSandbox": true
   },
   "models": {
