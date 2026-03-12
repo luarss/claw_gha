@@ -441,6 +441,33 @@ Record all predictions for quarterly review. Fill outcome after 3-6 months.
 
 ---
 
+## Strategy Performance Log
+
+Validated backtesting strategies for reference during analysis. Re-run quarterly.
+
+| Strategy | CAGR | Sharpe | Win Rate | Max DD | Last Validated | Status |
+|----------|------|--------|----------|--------|----------------|--------|
+| Low P/E + High ROE | — | — | — | — | — | *Pending backtest* |
+| Quality Compounders | — | — | — | — | — | *Pending backtest* |
+| Oversold Quality | — | — | — | — | — | *Pending backtest* |
+| Fast Grower | — | — | — | — | — | *Pending backtest* |
+| PEG < 1.0 | — | — | — | — | — | *Pending backtest* |
+
+**Quick Reference — Strategy Criteria:**
+
+| Strategy | P/E | ROE | Growth | D/E | Hold |
+|----------|-----|-----|--------|-----|------|
+| Low P/E + High ROE | <15 | >15% | — | <0.5 | 6mo |
+| PEG < 1.0 | — | — | 15-30% | — | 6mo |
+| Quality Compounders | <25 | >20% | — | — | 12mo |
+| Fast Grower | <30 | — | 25-50% | — | 12mo |
+| Oversold Quality | — | >15% | — | — | 3mo |
+
+**Next Quarterly Re-run:** —
+**See:** `skills/backtesting/STRATEGIES.md` for full definitions
+
+---
+
 ## Next Analysis Session
 - **Planned:** 2026-03-12 or 2026-03-14 (weekend review)
 - **Focus:** Price verification, NVDA GTC follow-through, potential new ideas
