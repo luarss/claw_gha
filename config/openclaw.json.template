@@ -28,7 +28,7 @@
   "agents": {
     "defaults": {
       "model": {
-        "primary": "bailian/qwen3.5-plus"
+        "primary": "bailian/glm-5"
       },
       "models": {
         "bailian/qwen3.5-plus": {},
@@ -54,13 +54,13 @@
         "id": "portfolio-advisor",
         "name": "Portfolio Advisor",
         "workspace": "$HOME/.openclaw/workspace-portfolio-advisor",
-        "model": { "primary": "bailian/qwen3-max-2026-01-23" }
+        "model": { "primary": "bailian/glm-5" }
       },
       {
         "id": "sector-researcher",
         "name": "Sector Researcher",
         "workspace": "$HOME/.openclaw/workspace-sector-researcher",
-        "model": { "primary": "bailian/qwen3.5-plus" },
+        "model": { "primary": "bailian/glm-5" },
         "tools": { "profile": "full" },
         "subagents": { "allowAgents": ["*"] }
       },
@@ -68,7 +68,7 @@
         "id": "aggregator",
         "name": "Aggregator",
         "workspace": "$HOME/.openclaw/workspace-aggregator",
-        "model": { "primary": "bailian/qwen3.5-plus" },
+        "model": { "primary": "bailian/glm-5" },
         "subagents": { "allowAgents": ["*"] }
       }
     ]
