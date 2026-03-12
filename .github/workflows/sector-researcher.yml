@@ -25,7 +25,7 @@ jobs:
       default-message: 'Research current sectors and add signals to queue'
       workspace-name: workspace-sector-researcher
       memory-path: memory/sector-researcher
-      additional-sync-paths: 'memory/research-queue.md memory/market-conditions.md'
+      additional-sync-paths: 'memory/research-queue.md memory/market-conditions.md memory/sectors_analysis.md memory/signals_queue.json memory/portfolio_recommendations.md'
       commit-message: 'chore: update sector-researcher memory [skip ci]'
       commit-user-name: 'OpenClaw Agent'
       commit-user-email: 'openclaw@users.noreply.github.com'
