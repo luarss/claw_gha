@@ -141,6 +141,19 @@ jobs:
         run: |
           openclaw agent --session-id ${{ inputs.session-id }} --message "$MESSAGE" --thinking high
 
+      - name: Debug Workspace Contents
+        run: |
+          echo "=== WORKSPACE CONTENTS ==="
+          echo "--- ~/.openclaw/${{ inputs.workspace-name }}/ ---"
+          ls -laR ~/.openclaw/${{ inputs.workspace-name }}/ 2>/dev/null || echo "Directory not found or empty"
+          echo ""
+          echo "=== MEMORY PATH BEFORE SYNC ==="
+          echo "--- ${{ inputs.memory-path }}/ ---"
+          ls -laR ${{ inputs.memory-path }}/ 2>/dev/null || echo "Directory not found or empty"
+          echo ""
+          echo "=== REPO ROOT ==="
+          ls -la
+
       - name: Sync Memory Back
         run: |
           if [ -d ~/.openclaw/${{ inputs.workspace-name }} ] && [ "$(ls -A ~/.openclaw/${{ inputs.workspace-name }} 2>/dev/null)" ]; then
@@ -160,6 +173,17 @@ jobs:
               cp ~/.openclaw/${{ inputs.workspace-name }}/"$filename" "$path" 2>/dev/null || true
             fi
           done
+
+      - name: Debug Memory After Sync
+        run: |
+          echo "=== MEMORY PATH AFTER SYNC ==="
+          ls -laR ${{ inputs.memory-path }}/ 2>/dev/null || echo "Directory not found or empty"
+          echo ""
+          echo "=== GIT STATUS ==="
+          git status
+          echo ""
+          echo "=== GIT DIFF (memory path) ==="
+          git diff ${{ inputs.memory-path }}/ || echo "No diff"
 
       - name: Commit Memory Changes
         if: github.ref == 'refs/heads/main'
