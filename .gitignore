@@ -13,3 +13,11 @@ Thumbs.db
 .vscode/
 *.swp
 *.swo
+
+# Claude Code working directory
+.claude/
+
+# Generated code files in skills (keep intentional implementations)
+memory/skills/**/generated/
+memory/skills/**/*.generated.*
+memory/skills/**/temp_*
