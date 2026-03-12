@@ -40,7 +40,14 @@
         "bailian/glm-4.7": {},
         "bailian/kimi-k2.5": {}
       },
-      "workspace": "$HOME/.openclaw/workspace"
+      "workspace": "$HOME/.openclaw/workspace",
+      "subagents": {
+        "maxSpawnDepth": 1,
+        "maxConcurrent": 8,
+        "runTimeoutSeconds": 900,
+        "archiveAfterMinutes": 60,
+        "maxChildrenPerAgent": 5
+      }
     },
     "list": [
       {
@@ -60,13 +67,15 @@
         "name": "Sector Researcher",
         "workspace": "$HOME/.openclaw/workspace-sector-researcher",
         "model": { "primary": "bailian/qwen3.5-plus" },
-        "tools": { "profile": "full" }
+        "tools": { "profile": "full" },
+        "subagents": { "allowAgents": ["*"] }
       },
       {
         "id": "aggregator",
         "name": "Aggregator",
         "workspace": "$HOME/.openclaw/workspace-aggregator",
-        "model": { "primary": "bailian/qwen3.5-plus" }
+        "model": { "primary": "bailian/qwen3.5-plus" },
+        "subagents": { "allowAgents": ["*"] }
       }
     ]
   },
