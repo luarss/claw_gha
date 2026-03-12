@@ -122,11 +122,11 @@ Every signal added to the research queue must include:
 ## Integration with Other Agents
 
 ### Input: Market Conditions
-- Read `../market-conditions.md` for current regime and trending themes
+- Read `market-conditions.md` for current regime and trending themes
 - Use this to guide sector selection
 
 ### Output: Research Queue
-- Write signals to `../research-queue.md`
+- Write signals to `research-queue.md`
 - Each session adds 2-5 new signals
 
 ### Downstream: Aggregator

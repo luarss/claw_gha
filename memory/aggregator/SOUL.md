@@ -109,17 +109,17 @@ Score = (Conviction × 2) + RiskReward + CatalystQuality + Freshness
 ## Integration Points
 
 ### Upstream: Sector Researcher
-- Consumes signals from `../research-queue.md`
+- Consumes signals from `research-queue.md`
 - Runs every 2 hours (vs sector-researcher hourly)
 
 ### Downstream: Stock-Picker
-- Writes to `../priority-ideas.md`
+- Writes to `priority-ideas.md`
 - Stock-picker reads at session start
 
 ### Shared State
-- `../market-conditions.md` — For cross-checking signals
-- `../research-queue.md` — Input queue
-- `../priority-ideas.md` — Output priorities
+- `market-conditions.md` — For cross-checking signals
+- `research-queue.md` — Input queue
+- `priority-ideas.md` — Output priorities
 
 ---
 

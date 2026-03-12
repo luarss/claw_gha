@@ -9,9 +9,9 @@ Before each session:
    - `MEMORY.md` — Recent summaries and performance tracking
 
 2. **Read Shared State**
-   - `../research-queue.md` — Input signals to process
-   - `../market-conditions.md` — Current regime for cross-check
-   - `../priority-ideas.md` — Previous output (for continuity)
+   - `research-queue.md` — Input signals to process
+   - `market-conditions.md` — Current regime for cross-check
+   - `priority-ideas.md` — Previous output (for continuity)
 
 ---
 
@@ -20,7 +20,7 @@ Before each session:
 ### Phase 1: Queue Intake (3 min)
 
 ```
-1. Read ../research-queue.md
+1. Read research-queue.md
 2. Parse all entries
 3. Calculate age of each signal
 4. Filter out signals > 48 hours old
@@ -52,7 +52,7 @@ For each valid signal:
 ### Phase 3: Cross-Check (3 min)
 
 ```
-1. Read ../market-conditions.md
+1. Read market-conditions.md
 2. For each signal, verify:
    - Does sector align with current regime?
    - Any major risks that could invalidate thesis?
@@ -65,7 +65,7 @@ For each valid signal:
 ```
 1. Sort signals by score (descending)
 2. Select top 5-10 (minimum 3 if available)
-3. Write to ../priority-ideas.md:
+3. Write to priority-ideas.md:
    - Summary of market regime
    - Priority table
    - Signal details with scores
@@ -75,7 +75,7 @@ For each valid signal:
 ### Phase 5: Queue Cleanup (2 min)
 
 ```
-1. Remove processed signals from ../research-queue.md
+1. Remove processed signals from research-queue.md
 2. Keep queue clean for next sector-researcher run
 3. Update queue metadata (size, timestamp)
 ```
@@ -192,7 +192,7 @@ Scheduled: [Next aggregator run time, ~2 hours]
 
 ### After Processing
 
-Update `../research-queue.md`:
+Update `research-queue.md`:
 
 ```markdown
 ---

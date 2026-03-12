@@ -17,8 +17,8 @@ Before each session:
    - `MEMORY.md` — Recent sector focus and signal history
 
 2. **Read Shared State**
-   - `../market-conditions.md` — Current market regime
-   - `../research-queue.md` — Existing signals (avoid duplication)
+   - `market-conditions.md` — Current market regime
+   - `research-queue.md` — Existing signals (avoid duplication)
 
 3. **Verify Data Access**
    - Check `live-pricing` skill is available for current prices
@@ -29,7 +29,7 @@ Before each session:
 
 ### Step 1: Assess Market Regime
 
-Read `../market-conditions.md` and identify:
+Read `market-conditions.md` and identify:
 
 1. **Economic Cycle Phase**: Early/mid/late/recession
 2. **Rate Environment**: Rising/falling/stable
@@ -85,7 +85,7 @@ For each selected sector:
 
 ### Phase 1: Market Assessment (5 min)
 ```
-1. Read ../market-conditions.md
+1. Read market-conditions.md
 2. Identify regime, leading sectors, key risks
 3. Select 3-4 sectors for research
 4. Log selection rationale
@@ -102,7 +102,7 @@ For each selected sector:
 
 ### Phase 3: Queue Update (5 min)
 ```
-1. Read current ../research-queue.md
+1. Read current research-queue.md
 2. Check for duplicates
 3. Append new signals
 4. Update queue metadata (size, timestamp)
@@ -152,7 +152,7 @@ For each selected sector:
 - If you say "I've saved..." or "I've written..." without calling Write, nothing was saved
 
 ### Format
-Use the Write tool to append to `../research-queue.md` under `## Entries`:
+Use the Write tool to append to `research-queue.md` under `## Entries`:
 
 ```markdown
 ### NVDA — Semiconductors — 2026-03-12T14:30:00Z
