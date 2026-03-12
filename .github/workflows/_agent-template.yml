@@ -66,6 +66,9 @@ jobs:
       - name: Install Playwright Browsers
         run: npx playwright install chromium
 
+      - name: Install Skills from ClawHub
+        run: npx clawhub@latest install self-improving-agent
+
       - name: Sanitize Input
         env:
           RAW_MESSAGE: ${{ github.event.inputs.message }}
@@ -129,6 +132,11 @@ jobs:
             cp -r ~/.openclaw/${{ inputs.workspace-name }}/* ${{ inputs.memory-path }}/ || echo "Warning: Some files could not be copied"
           else
             echo "Warning: No workspace files to sync back"
+          fi
+          # Sync .learnings directory (self-improving-agent skill)
+          if [ -d ~/.openclaw/${{ inputs.workspace-name }}/.learnings ]; then
+            mkdir -p ${{ inputs.memory-path }}/.learnings
+            cp -r ~/.openclaw/${{ inputs.workspace-name }}/.learnings/* ${{ inputs.memory-path }}/.learnings/ 2>/dev/null || true
           fi
           # Sync additional paths back to repo
           for path in ${{ inputs.additional-sync-paths }}; do
