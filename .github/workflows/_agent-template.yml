@@ -31,6 +31,10 @@ on:
       otel-service-name:
         required: true
         type: string
+      tool-profile:
+        required: false
+        type: string
+        default: ''
 
 env:
   FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
@@ -122,7 +126,11 @@ jobs:
           FINNHUB_API_KEY: ${{ secrets.FINNHUB_API_KEY }}
           FINANCIALDATA_API_KEY: ${{ secrets.FINANCIALDATA_API_KEY }}
         run: |
-          openclaw agent --session-id ${{ inputs.session-id }} --message "$MESSAGE" --thinking high
+          TOOL_PROFILE_ARG=""
+          if [ -n "${{ inputs.tool-profile }}" ]; then
+            TOOL_PROFILE_ARG="--tool-profile ${{ inputs.tool-profile }}"
+          fi
+          openclaw agent --session-id ${{ inputs.session-id }} --message "$MESSAGE" --thinking high $TOOL_PROFILE_ARG
 
       - name: Sync Memory Back
         run: |

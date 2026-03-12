@@ -59,7 +59,8 @@
         "id": "sector-researcher",
         "name": "Sector Researcher",
         "workspace": "$HOME/.openclaw/workspace-sector-researcher",
-        "model": { "primary": "bailian/qwen3.5-plus" }
+        "model": { "primary": "bailian/qwen3.5-plus" },
+        "tools": { "profile": "full" }
       },
       {
         "id": "aggregator",
