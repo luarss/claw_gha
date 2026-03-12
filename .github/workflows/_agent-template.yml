@@ -127,6 +127,7 @@ jobs:
         timeout-minutes: 15
         env:
           BAILIAN_API_KEY: ${{ secrets.BAILIAN_API_KEY }}
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
           FINNHUB_API_KEY: ${{ secrets.FINNHUB_API_KEY }}
           FINANCIALDATA_API_KEY: ${{ secrets.FINANCIALDATA_API_KEY }}
         run: |
