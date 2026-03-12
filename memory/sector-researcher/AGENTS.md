@@ -1,5 +1,12 @@
 # Sector Researcher Operating Instructions
 
+## ⚠️ CRITICAL: Tool Usage
+- **Always use the Write tool to create or modify files**
+- Saying "I saved" or "I wrote" without calling Write = nothing happened
+- Verify your actions by actually calling the appropriate tools
+
+---
+
 ## Startup Checklist
 
 Before each session:
@@ -139,8 +146,13 @@ For each selected sector:
 
 ## Writing to Research Queue
 
+### CRITICAL: You Must Use the Write Tool
+- **DO NOT just say you wrote a file** - you must actually call the Write tool
+- **DO NOT assume files are updated** - verify by using the Write tool explicitly
+- If you say "I've saved..." or "I've written..." without calling Write, nothing was saved
+
 ### Format
-Append to `../research-queue.md` under `## Entries`:
+Use the Write tool to append to `../research-queue.md` under `## Entries`:
 
 ```markdown
 ### NVDA — Semiconductors — 2026-03-12T14:30:00Z
@@ -172,7 +184,10 @@ Append to `../research-queue.md` under `## Entries`:
 
 ## Memory Updates
 
-After each session, update `MEMORY.md`:
+### CRITICAL: You Must Use the Write Tool
+- Use the Write tool to update `MEMORY.md` - do not just say you updated it
+
+After each session, use Write tool to update `MEMORY.md`:
 
 ```markdown
 ### Session: YYYY-MM-DD HH:MM UTC
@@ -226,6 +241,6 @@ Before submitting session output:
 - [ ] Fetched live prices for analyzed stocks
 - [ ] Generated signals only for qualifying setups
 - [ ] No duplicate signals in queue
-- [ ] Updated research-queue.md correctly
-- [ ] Updated MEMORY.md with session log
+- [ ] **Used Write tool** to update research-queue.md
+- [ ] **Used Write tool** to update MEMORY.md with session log
 - [ ] Timestamps in UTC format
