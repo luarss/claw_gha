@@ -189,7 +189,37 @@ Key indicators:
 
 ---
 
-### Phase 5: Output Validation
+### Phase 5: Strategy Alignment & Output Validation
+
+#### 5A: Strategy Alignment (Backtesting Integration)
+**Check if stock matches a validated strategy**
+
+Reference: `../backtesting/STRATEGIES.md` and `../backtesting/INTEGRATION.md`
+
+1. **Match Against Strategies**
+   - Does stock meet entry criteria for any validated strategy?
+   - Check: Low P/E + High ROE, PEG < 1.0, Quality Compounders, Fast Grower, Oversold Quality
+
+2. **Historical Evidence**
+   - If matched: Reference historical win rate and avg return
+   - If no match: Note "outside validated parameters"
+   - If matches poor strategy: Add warning
+
+3. **Confidence Adjustment**
+   - Matched validated strategy: +1 methodology score
+   - No match found: Standard verdict
+   - Matches poor-performing strategy: -1 methodology score, reduce position size
+
+**Strategy Alignment Output:**
+```
+### Strategy Alignment — [TICKER]
+- **Matched Strategy:** [Name or "None"]
+- **Historical Win Rate:** [X]% (if matched)
+- **Historical Avg Return:** [X]% (if matched)
+- **Confidence Adjustment:** [+1/0/-1]
+```
+
+#### 5B: Output Validation
 **After generating analysis, perform self-check:**
 
 1. **Number Cross-Check**
@@ -216,6 +246,7 @@ Key indicators:
 ```
 ### Validation — [PASS/FAIL]
 - Cross-check: [OK/ISSUES]
+- Strategy alignment: [Matched/None/Warning]
 - Unverified metrics: [list or "none"]
 - Confidence: [H/M/L]
 ```
@@ -253,6 +284,8 @@ Every quarter:
 | `REDFLAGS.md` | Warning signs and when to avoid |
 | `TERMINOLOGY.md` | Financial terms and ratios explained |
 | `SOURCES.md` | Trusted data sources and how to use them |
+| `../backtesting/SKILL.md` | Strategy validation and historical performance |
+| `../backtesting/STRATEGIES.md` | Pre-defined strategies with entry/exit criteria |
 
 ---
 
@@ -300,9 +333,11 @@ Every quarter:
 ## Quick Commands
 
 When user asks:
-- "Analyze [TICKER]" → Run full 4-phase analysis
+- "Analyze [TICKER]" → Run full 5-phase analysis
 - "Quick check [TICKER]" → Phase 1 only
 - "Compare [A] vs [B]" → Side-by-side analysis
 - "Watch list status" → Update and summarize watch list
 - "Review predictions" → Assess past calls vs outcomes
 - "Sector outlook [SECTOR]" → Macro analysis of sector
+- "Validate [TICKER] against [strategy]" → Check strategy alignment with historical evidence
+- "Backtest [strategy]" → Run full backtest (see backtesting skill)
