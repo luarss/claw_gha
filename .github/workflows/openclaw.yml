@@ -1,9 +1,9 @@
-name: OpenClaw Agent
+name: Stock Picker Agent
 
 on:
   schedule:
     - cron: '0 */6 * * *'  # Every 6 hours
-  workflow_dispatch:        # Manual trigger
+  workflow_dispatch:
     inputs:
       message:
         description: 'Message to send to agent'
@@ -11,125 +11,22 @@ on:
         default: 'Continue stock analysis and update picks'
 
 concurrency:
-  group: openclaw-agent
+  group: stock-picker-agent
   cancel-in-progress: false
 
 permissions:
   contents: write
 
-env:
-  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
-  OTEL_ENDPOINT: ${{ secrets.OTEL_ENDPOINT }}
-  OTEL_EXPORTER_OTLP_ENDPOINT: ${{ secrets.OTEL_ENDPOINT }}
-  OTEL_SERVICE_NAME: openclaw-stock-picker-gha
-
 jobs:
   run-agent:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: '22'
-
-      - name: Install OpenClaw
-        run: |
-          # Install to user-level directory to avoid world-writable plugin paths
-          mkdir -p ~/.npm-global
-          npm config set prefix '~/.npm-global'
-          echo "$HOME/.npm-global/bin" >> $GITHUB_PATH
-          # Set NODE_PATH so plugins can find globally installed dependencies
-          echo "NODE_PATH=$HOME/.npm-global/lib/node_modules" >> $GITHUB_ENV
-          npm install -g openclaw@latest
-          # Install OpenTelemetry dependencies for diagnostics-otel plugin
-          npm install -g @opentelemetry/api @opentelemetry/api-logs @opentelemetry/sdk-node @opentelemetry/sdk-metrics @opentelemetry/sdk-logs @opentelemetry/sdk-trace-base @opentelemetry/resources @opentelemetry/semantic-conventions @opentelemetry/exporter-trace-otlp-proto @opentelemetry/exporter-metrics-otlp-proto @opentelemetry/exporter-logs-otlp-proto
-
-      - name: Install Xvfb and Chrome
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y xvfb chromium-browser
-
-      - name: Start Xvfb
-        run: Xvfb :99 -screen 0 1920x1080x24 &
-
-      - name: Sanitize Input
-        env:
-          RAW_MESSAGE: ${{ github.event.inputs.message }}
-        run: |
-          # Remove potentially dangerous characters and limit length
-          SANITIZED=$(echo "$RAW_MESSAGE" | sed 's/[`$\\]//g' | tr -d '\n' | head -c 1000)
-          echo "MESSAGE=${SANITIZED:-Continue stock analysis and update picks}" >> $GITHUB_ENV
-
-      - name: Configure OpenClaw
-        env:
-          BAILIAN_API_KEY: ${{ secrets.BAILIAN_API_KEY }}
-          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
-          FINNHUB_API_KEY: ${{ secrets.FINNHUB_API_KEY }}
-          HONEYCOMB_API_KEY: ${{ secrets.HONEYCOMB_API_KEY }}
-          GATEWAY_PORT: 18789
-        run: |
-          mkdir -p ~/.openclaw/workspace
-          # Copy memory files to workspace (with proper error handling)
-          if [ -d "memory" ] && [ "$(ls -A memory 2>/dev/null)" ]; then
-            cp -r memory/* ~/.openclaw/workspace/
-          else
-            echo "Warning: No memory files to sync"
-          fi
-          # Generate config from template
-          export HOME
-          envsubst < config/openclaw.json.template > ~/.openclaw/openclaw.json
-
-      - name: Start Gateway (background)
-        env:
-          GATEWAY_PORT: 18789
-        run: |
-          openclaw gateway --port $GATEWAY_PORT &
-          # Health check loop instead of arbitrary sleep
-          for i in {1..30}; do
-            if curl -s "http://localhost:$GATEWAY_PORT/health" > /dev/null 2>&1; then
-              echo "Gateway is healthy"
-              break
-            fi
-            if [ $i -eq 30 ]; then
-              echo "ERROR: Gateway failed to start after 30 seconds"
-              exit 1
-            fi
-            sleep 1
-          done
-
-      - name: Run Agent
-        timeout-minutes: 15
-        env:
-          DISPLAY: :99
-          BAILIAN_API_KEY: ${{ secrets.BAILIAN_API_KEY }}
-          FINNHUB_API_KEY: ${{ secrets.FINNHUB_API_KEY }}
-        run: |
-          openclaw agent --session-id stock-picker --message "$MESSAGE" --thinking high
-
-      - name: Sync Memory Back
-        run: |
-          # Copy updated memory back to repo (with proper error handling)
-          if [ -d ~/.openclaw/workspace ] && [ "$(ls -A ~/.openclaw/workspace 2>/dev/null)" ]; then
-            cp -r ~/.openclaw/workspace/* memory/ || echo "Warning: Some files could not be copied"
-          else
-            echo "Warning: No workspace files to sync back"
-          fi
-
-      - name: Commit Memory Changes
-        if: github.ref == 'refs/heads/main'
-        uses: stefanzweifel/git-auto-commit-action@v5
-        with:
-          commit_message: "chore: update memory [skip ci]"
-          commit_user_name: "OpenClaw Agent"
-          commit_user_email: "openclaw@users.noreply.github.com"
-          file_pattern: memory/
-
-      - name: Upload Diagnostic Logs
-        if: always()
-        uses: actions/upload-artifact@v4
-        with:
-          name: openclaw-logs-${{ github.run_id }}
-          path: /tmp/openclaw/openclaw-*.log
-          retention-days: 7
+    uses: ./.github/workflows/_agent-template.yml
+    with:
+      session-id: stock-picker
+      default-message: 'Continue stock analysis and update picks'
+      workspace-name: workspace
+      memory-path: memory
+      commit-message: 'chore: update memory [skip ci]'
+      commit-user-name: 'OpenClaw Agent'
+      commit-user-email: 'openclaw@users.noreply.github.com'
+      otel-service-name: openclaw-stock-picker-gha
+    secrets: inherit
