@@ -5,16 +5,16 @@ This file persists across GitHub Actions runs. Use it to maintain analysis histo
 
 ---
 
-## Current Watch List (Updated 2026-03-11 18:28 UTC)
+## Current Watch List (Updated 2026-03-12 00:45 UTC)
 
 | Ticker | Added | Current Price | Entry Zone | Target | Stop Loss | Status |
 |--------|-------|---------------|------------|--------|-----------|--------|
-| GOOGL | 2026-03-10 | $308.25 | $270-285 (pullback) | $340-360 | $270 | **HOLD** ⚠️ |
-| AMZN | 2026-03-10 | $212.10 | $200-215 | $260-280 | $185 | **BUY** ✅ |
-| MSFT | 2026-03-10 | $403.75 | $400-420 | $500-520 | $370 | **BUY** ✅ |
-| JPM | 2026-03-10 | $286.49 | $270-280 (pullback) | $310-320 | $260 | **HOLD** ⚠️ |
-| NVDA | 2026-03-10 | $185.05 | $160-170 | $250-280 | $160 | **WATCH** ⏸️ |
-| AAPL | 2026-03-10 | $260.07 | $230-240 | $300+ | $230 | **WATCH** ⏸️ |
+| GOOGL | 2026-03-10 | $307.93 | $270-285 (pullback) | $340-360 | $270 | **HOLD** ⚠️ |
+| AMZN | 2026-03-10 | $212.71 | $200-215 | $260-280 | $185 | **BUY** ✅ |
+| MSFT | 2026-03-10 | $403.72 | $400-420 | $500-520 | $370 | **BUY** ✅ |
+| JPM | 2026-03-10 | $286.40 | $270-280 (pullback) | $310-320 | $260 | **HOLD** ⚠️ |
+| NVDA | 2026-03-10 | $185.52 | $160-170 | $250-280 | $160 | **WATCH** ⏸️ |
+| AAPL | 2026-03-10 | $260.20 | $230-240 | $300+ | $230 | **WATCH** ⏸️ |
 
 **Status**: WATCHING | POSITION | TRIMMED | EXITED | REMOVED
 
@@ -628,6 +628,143 @@ Record all predictions for quarterly review. Fill outcome after 3-6 months.
 | GOOGL | $308 | $350 | $270 | +14% | -12% | **1.2:1** | HOLD |
 | JPM | $286 | $315 | $260 | +10% | -9% | **1.1:1** | HOLD |
 | NVDA | $185 | $265 | $160 | +43% | -14% | **3.1:1** | WAIT |
+| AAPL | $260 | $300 | $230 | +15% | -12% | **1.3:1** | WAIT |
+
+**Note:** NVDA shows attractive R/R but entry discipline is critical. At $160-170: R/R improves to 3.5-4:1.
+
+#### Portfolio Construction (Action Plan)
+
+**Immediate Actions (This Week):**
+- [ ] **Initiate AMZN** — 2-3% position at $212-215
+- [ ] **Initiate MSFT** — 2-3% position at $400-406
+- [ ] Set alerts: GOOGL $270, JPM $270, NVDA $170, AAPL $240
+
+**Target Allocation:**
+- AMZN: 2-3%
+- MSFT: 2-3%
+- GOOGL: Hold existing (no new capital)
+- JPM: Hold existing (no new capital)
+- NVDA: 2-3% (on pullback to $160-170)
+- AAPL: 1-2% (on pullback to $230-240)
+- **Cash:** 40-50% (disciplined patience)
+
+**Sector Balance:**
+- Tech: ~60% (GOOGL, AMZN, MSFT, future NVDA/AAPL)
+- Financials: ~20% (JPM)
+- Cash: 40-50%
+- **Gap:** Healthcare, industrials, consumer staples, energy
+
+#### Market Regime Check (Unchanged)
+
+**Tailwinds:**
+- ✅ Soft landing scenario (base case)
+- ✅ Fed cutting rates (growth stock tailwind)
+- ✅ Earnings growth supporting valuations
+
+**Headwinds:**
+- ⚠️ Geopolitical risk (Iran conflict — monitor oil)
+- ⚠️ AI capex sustainability questions
+- ⚠️ Valuation concentration in mega-cap tech
+
+#### Conviction Ranking (Updated)
+
+1. **MSFT** — BUY (2-3%) — Best R/R among entry-zone candidates (3.3:1)
+2. **AMZN** — BUY (2-3%) — Quality compounder, within entry zone (2.1:1)
+3. **GOOGL** — HOLD — Thesis intact, valuation stretched from original entry
+4. **JPM** — HOLD — Target achieved, hold for continued compound
+5. **NVDA** — WATCH — Exceptional business, wait for disciplined entry
+6. **AAPL** — WATCH — Quality company, premium valuation requires patience
+
+**Key Insight:** MSFT offers the best risk-reward among current entry-zone candidates. AMZN is a close second. Both are quality compounders with clear AI monetization pathways.
+
+#### Next Session Priorities
+
+1. **Execute entries** on AMZN and MSFT if prices hold in zone
+2. **Screen for non-tech diversification** — healthcare, industrials, consumer staples
+3. **Monitor NVDA post-GTC** — potential "sell the news" opportunity
+4. **Review Q1 earnings calendar** for holdings
+5. **Prepare Q1 2026 quarterly review** (deadline: March 31)
+
+---
+
+## Analysis History (Continued)
+
+### 2026-03-12 00:45 UTC — Daily Price Update & Thesis Review
+
+**Session Time:** 2026-03-12 00:45 UTC
+**Market Status:** Previous close (2026-03-11)
+
+#### Price Action Summary
+
+| Ticker | Current | Day Change | vs. Entry Zone | Action |
+|--------|---------|------------|----------------|--------|
+| GOOGL | $307.93 | +0.29% | +8-14% above revised entry | HOLD |
+| AMZN | $212.71 | -0.76% | **Within $200-215** | **BUY** ✅ |
+| MSFT | $403.72 | -0.50% | **Within $400-420** | **BUY** ✅ |
+| JPM | $286.40 | -0.81% | +2-6% above revised entry | HOLD |
+| NVDA | $185.52 | +0.41% | +9-16% above ideal entry | WAIT |
+| AAPL | $260.20 | -0.24% | +8-13% above ideal entry | WAIT |
+
+#### Key Observations
+
+**✅ BUY Opportunities (Still Within Entry Zones):**
+
+1. **AMZN — $212.71**
+   - Slight pullback (-0.76%) keeps it in strike zone
+   - Thesis unchanged: AWS AI monetization + Ads scaling + Retail leverage
+   - **Target:** $260-280 (22-32% upside)
+   - **Stop:** $185 (-13% downside)
+   - **R/R:** ~2.1:1
+   - **Action:** Initiate 2-3% position
+
+2. **MSFT — $403.72**
+   - Modest weakness (-0.50%) = entry opportunity
+   - Thesis unchanged: Enterprise AI leader, Azure + Copilot monetization
+   - **Target:** $500-520 (24-29% upside)
+   - **Stop:** $370 (-8% downside)
+   - **R/R:** ~3.3:1 (best among entry candidates)
+   - **Action:** Initiate 2-3% position
+
+**⚠️ HOLD (Thesis Intact, Valuation Stretched):**
+
+3. **GOOGL — $307.93**
+   - Up ~75% from original thesis entry ($175-180)
+   - Original target $220-240 ACHIEVED
+   - **Revised Target:** $340-360 (10-17% upside)
+   - **Revised Entry:** $270-285 (10-12% pullback needed)
+   - **Action:** Hold existing, do NOT initiate new positions
+   - **Note:** Still top conviction thesis, but risk/reward no longer favors new capital
+
+4. **JPM — $286.40**
+   - Original target $270-280 ACHIEVED
+   - **Revised Target:** $310-320 (8-12% upside)
+   - **Revised Entry:** $270-280 (2-6% pullback)
+   - **Action:** Hold existing, do NOT add
+   - **Note:** Best-in-class bank, adds financial sector diversification
+
+**⏸️ WATCH (Discipline Required):**
+
+5. **NVDA — $185.52**
+   - GTC momentum continuing (+0.41%)
+   - Exceptional business (63% margins, 73% revenue growth)
+   - **Ideal Entry:** $160-170 (14% pullback needed)
+   - **Risk:** "Sell the news" post-GTC possible
+   - **Action:** WAIT — patience will be rewarded
+
+6. **AAPL — $260.20**
+   - No change — premium valuation persists
+   - **Ideal Entry:** $230-240 (8-12% pullback)
+   - **Action:** WAIT
+
+#### Updated Risk-Reward Matrix
+
+| Ticker | Current | Target (Mid) | Stop | Upside | Downside | R/R | Conviction |
+|--------|---------|--------------|------|--------|----------|-----|------------|
+| AMZN | $213 | $270 | $185 | +27% | -13% | **2.1:1** | HIGH |
+| MSFT | $404 | $510 | $370 | +26% | -8% | **3.3:1** | HIGH |
+| GOOGL | $308 | $350 | $270 | +14% | -12% | **1.2:1** | HOLD |
+| JPM | $286 | $315 | $260 | +10% | -9% | **1.1:1** | HOLD |
+| NVDA | $186 | $265 | $160 | +43% | -14% | **3.1:1** | WAIT |
 | AAPL | $260 | $300 | $230 | +15% | -12% | **1.3:1** | WAIT |
 
 **Note:** NVDA shows attractive R/R but entry discipline is critical. At $160-170: R/R improves to 3.5-4:1.
