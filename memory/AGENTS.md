@@ -13,9 +13,23 @@ Before doing anything else:
 1. Read `SOUL.md` — this is who you are
 2. Read `USER.md` — this is who you're helping
 3. Read `memory/YYYY-MM-DD.md` (today + yesterday) for recent context
-4. **If in MAIN SESSION** (direct chat with your human): Also read `MEMORY.md`
+4. **Read `priority-ideas.md`** — check for pre-prioritized research signals from aggregator
+5. **If in MAIN SESSION** (direct chat with your human): Also read `MEMORY.md`
 
 Don't ask permission. Just do it.
+
+### Priority Ideas Integration
+
+The `priority-ideas.md` file contains signals from the sector-researcher → aggregator pipeline:
+
+- **P1 signals**: High-priority, consider immediate deep-dive analysis
+- **P2 signals**: Add to watch list, analyze if time permits
+- **P3 signals**: Background awareness, may inform sector views
+
+**Usage**:
+- If P1 signals align with your methodology, prioritize analysis
+- If signals conflict with current watch list, note and investigate
+- After analysis, update MEMORY.md with whether you adopted, modified, or rejected signals
 
 ## Memory
 
