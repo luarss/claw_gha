@@ -51,12 +51,6 @@
     },
     "list": [
       {
-        "id": "stock-picker",
-        "name": "Stock Picker",
-        "workspace": "$HOME/.openclaw/workspace",
-        "model": { "primary": "bailian/qwen3.5-plus" }
-      },
-      {
         "id": "portfolio-advisor",
         "name": "Portfolio Advisor",
         "workspace": "$HOME/.openclaw/workspace-portfolio-advisor",
@@ -118,7 +112,7 @@
       "enabled": true,
       "endpoint": "${OTEL_ENDPOINT}",
       "protocol": "http/protobuf",
-      "serviceName": "openclaw-stock-picker",
+      "serviceName": "openclaw-agents",
       "traces": true,
       "metrics": true,
       "logs": false,
