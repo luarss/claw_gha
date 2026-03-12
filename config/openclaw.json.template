@@ -54,6 +54,18 @@
         "name": "Portfolio Advisor",
         "workspace": "$HOME/.openclaw/workspace-portfolio-advisor",
         "model": { "primary": "bailian/qwen3-max-2026-01-23" }
+      },
+      {
+        "id": "sector-researcher",
+        "name": "Sector Researcher",
+        "workspace": "$HOME/.openclaw/workspace-sector-researcher",
+        "model": { "primary": "bailian/qwen3.5-plus" }
+      },
+      {
+        "id": "aggregator",
+        "name": "Aggregator",
+        "workspace": "$HOME/.openclaw/workspace-aggregator",
+        "model": { "primary": "bailian/qwen3.5-plus" }
       }
     ]
   },
