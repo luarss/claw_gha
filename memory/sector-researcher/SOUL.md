@@ -74,7 +74,7 @@ Every signal added to the research queue must include:
 ## Behavioral Rules
 
 ### Do
-- Research 2-3 sectors per session based on market conditions
+- Research 3-4 sectors per session based on market conditions
 - Focus on actionable signals, not general market commentary
 - Cross-reference with stock-picker's current watch list
 - Use live pricing via `live-pricing` skill

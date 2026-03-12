@@ -56,10 +56,15 @@ For each selected sector:
      - Average volume > 1M
      - P/E < 40 (unless hypergrowth)
 
-2. **Analyze Top 3-5 Tickers**
-   - Fetch current prices via `live-pricing`
-   - Check recent news and catalysts
-   - Assess technical position (RSI, trend)
+2. **Tiered Analysis Approach**
+   - **Tier 1 (Deep Dive)**: Top 3-4 stocks by momentum/relevance
+     - Full fundamental + technical analysis
+     - Detailed catalyst research
+     - High-quality signal generation
+   - **Tier 2 (Screening)**: Next 3-4 stocks
+     - Quick price check via `live-pricing`
+     - Brief catalyst scan
+     - WATCH signals only if setup is compelling
 
 3. **Generate Signals**
    - Only for stocks meeting minimum criteria:
@@ -75,17 +80,17 @@ For each selected sector:
 ```
 1. Read ../market-conditions.md
 2. Identify regime, leading sectors, key risks
-3. Select 2-3 sectors for research
+3. Select 3-4 sectors for research
 4. Log selection rationale
 ```
 
-### Phase 2: Sector Research (10 min per sector)
+### Phase 2: Sector Research (12 min per sector)
 ```
 For each selected sector:
-1. Screen for candidates
-2. Fetch prices via live-pricing
-3. Research news and catalysts
-4. Generate 1-3 signals per sector
+1. Screen for 5-8 candidates
+2. Tier 1: Deep dive on top 3-4 (fundamentals + technicals)
+3. Tier 2: Quick screen on next 3-4 (price check + catalyst scan)
+4. Generate 2-3 signals per sector (focus on Tier 1 quality)
 ```
 
 ### Phase 3: Queue Update (5 min)
