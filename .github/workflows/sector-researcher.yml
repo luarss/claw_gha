@@ -1,0 +1,33 @@
+name: Sector Researcher Agent
+
+on:
+  schedule:
+    - cron: '0 * * * *'  # Every hour
+  workflow_dispatch:
+    inputs:
+      message:
+        description: 'Message to send to agent'
+        required: true
+        default: 'Research current sectors and add signals to queue'
+
+concurrency:
+  group: sector-researcher-agent
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+
+jobs:
+  run-agent:
+    uses: ./.github/workflows/_agent-template.yml
+    with:
+      session-id: sector-researcher
+      default-message: 'Research current sectors and add signals to queue'
+      workspace-name: workspace-sector-researcher
+      memory-path: memory/sector-researcher
+      additional-sync-paths: 'memory/research-queue.md memory/market-conditions.md'
+      commit-message: 'chore: update sector-researcher memory [skip ci]'
+      commit-user-name: 'OpenClaw Agent'
+      commit-user-email: 'openclaw@users.noreply.github.com'
+      otel-service-name: openclaw-sector-researcher-gha
+    secrets: inherit

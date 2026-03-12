@@ -15,6 +15,10 @@ on:
       memory-path:
         required: true
         type: string
+      additional-sync-paths:
+        required: false
+        type: string
+        default: ''
       commit-message:
         required: true
         type: string
@@ -84,6 +88,14 @@ jobs:
           else
             echo "Warning: No memory files to sync"
           fi
+          # Copy additional sync paths to workspace
+          for path in ${{ inputs.additional-sync-paths }}; do
+            if [ -f "$path" ]; then
+              cp "$path" ~/.openclaw/${{ inputs.workspace-name }}/
+            elif [ -d "$path" ]; then
+              cp -r "$path" ~/.openclaw/${{ inputs.workspace-name }}/
+            fi
+          done
           export HOME
           envsubst < config/openclaw.json.template > ~/.openclaw/openclaw.json
 
@@ -119,6 +131,13 @@ jobs:
           else
             echo "Warning: No workspace files to sync back"
           fi
+          # Sync additional paths back to repo
+          for path in ${{ inputs.additional-sync-paths }}; do
+            filename=$(basename "$path")
+            if [ -f ~/.openclaw/${{ inputs.workspace-name }}/"$filename" ]; then
+              cp ~/.openclaw/${{ inputs.workspace-name }}/"$filename" "$path" 2>/dev/null || true
+            fi
+          done
 
       - name: Commit Memory Changes
         if: github.ref == 'refs/heads/main'
@@ -127,7 +146,7 @@ jobs:
           commit_message: ${{ inputs.commit-message }}
           commit_user_name: ${{ inputs.commit-user-name }}
           commit_user_email: ${{ inputs.commit-user-email }}
-          file_pattern: ${{ inputs.memory-path }}/
+          file_pattern: ${{ inputs.memory-path }}/ ${{ inputs.additional-sync-paths }}
 
       - name: Upload Diagnostic Logs
         if: always()

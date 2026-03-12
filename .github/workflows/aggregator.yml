@@ -1,0 +1,33 @@
+name: Aggregator Agent
+
+on:
+  schedule:
+    - cron: '0 */2 * * *'  # Every 2 hours
+  workflow_dispatch:
+    inputs:
+      message:
+        description: 'Message to send to agent'
+        required: true
+        default: 'Aggregate research queue and update priority ideas'
+
+concurrency:
+  group: aggregator-agent
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+
+jobs:
+  run-agent:
+    uses: ./.github/workflows/_agent-template.yml
+    with:
+      session-id: aggregator
+      default-message: 'Aggregate research queue and update priority ideas'
+      workspace-name: workspace-aggregator
+      memory-path: memory/aggregator
+      additional-sync-paths: 'memory/research-queue.md memory/priority-ideas.md'
+      commit-message: 'chore: update aggregator memory [skip ci]'
+      commit-user-name: 'OpenClaw Agent'
+      commit-user-email: 'openclaw@users.noreply.github.com'
+      otel-service-name: openclaw-aggregator-gha
+    secrets: inherit
