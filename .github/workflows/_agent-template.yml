@@ -67,7 +67,13 @@ jobs:
         run: npx playwright install chromium
 
       - name: Install Skills from ClawHub
-        run: npx clawhub@latest install self-improving-agent
+        env:
+          CLAWHUB_API_KEY: ${{ secrets.CLAWHUB_API_KEY }}
+        run: |
+          if [ -n "$CLAWHUB_API_KEY" ]; then
+            npx clawhub@latest login --no-browser --token "$CLAWHUB_API_KEY"
+          fi
+          npx clawhub@latest install self-improving-agent
 
       - name: Sanitize Input
         env:
