@@ -41,6 +41,25 @@
         "bailian/kimi-k2.5": {}
       },
       "workspace": "$HOME/.openclaw/workspace"
+    },
+    "list": [
+      {
+        "id": "stock-picker",
+        "name": "Stock Picker",
+        "workspace": "$HOME/.openclaw/workspace",
+        "model": { "primary": "bailian/qwen3.5-plus" }
+      },
+      {
+        "id": "portfolio-advisor",
+        "name": "Portfolio Advisor",
+        "workspace": "$HOME/.openclaw/workspace-portfolio-advisor",
+        "model": { "primary": "bailian/qwen3-max-2026-01-23" }
+      }
+    ]
+  },
+  "skills": {
+    "load": {
+      "extraDirs": ["$HOME/projects/claw_gha/memory/skills"]
     }
   },
   "tools": {

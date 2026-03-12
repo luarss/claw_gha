@@ -4,46 +4,53 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## What This Is
 
-OpenClaw on GitHub Actions — an AI-powered stock analysis agent that runs on GitHub Actions infrastructure every 6 hours. This is a **configuration + memory repository**, not a traditional code project. There is no package.json, build step, or test suite.
+OpenClaw on GitHub Actions — AI-powered investment agents that run on GitHub Actions infrastructure. This is a **configuration + memory repository**, not a traditional code project. There is no package.json, build step, or test suite.
 
-The agent uses the [OpenClaw](https://openclaw.dev) CLI framework with:
-- **LLM**: Alibaba Bailian (Qwen models via `bailian/qwen3.5-plus` by default)
+### Two Agents
+
+| Agent | Purpose | Schedule | Model |
+|-------|---------|----------|-------|
+| **stock-picker** | Individual stock research, find opportunities | Every 6 hours | `bailian/qwen3.5-plus` |
+| **portfolio-advisor** | Portfolio allocation, risk management, rebalancing | Weekly (Sunday) | `bailian/qwen3-max-2026-01-23` |
+
+The agents use the [OpenClaw](https://openclaw.dev) CLI framework with:
+- **LLM**: Alibaba Bailian (Qwen models)
 - **Web search**: Google Gemini
 - **Stock prices**: Finnhub API
 - **Browser automation**: Chromium (headless, Xvfb on Linux)
 
-## Running Locally
+## Running Locally (Optional)
 
 ```bash
-# First-time setup
-./scripts/setup.sh
+# Setup workspaces
+mkdir -p ~/.openclaw/workspace ~/.openclaw/workspace-portfolio-advisor
+cp -r memory/*.md ~/.openclaw/workspace/
+cp -r memory/portfolio-advisor/*.md ~/.openclaw/workspace-portfolio-advisor/
+export HOME && envsubst < config/openclaw.json.template > ~/.openclaw/openclaw.json
 
-# Sync memory from repo to OpenClaw workspace
-./scripts/sync-memory.sh to-workspace
-
-# Run the agent with a message
-./scripts/run-agent.sh "Analyze NVDA"
-
-# Or manually:
+# Run agent
 openclaw gateway --port 18789 &
 openclaw agent --session-id stock-picker --message "..." --thinking high
-
-# After a run, sync memory back
-./scripts/sync-memory.sh from-workspace
+openclaw agent --session-id portfolio-advisor --message "..." --thinking high
 ```
 
 Required env vars (put in `.env`): `BAILIAN_API_KEY`, `GEMINI_API_KEY`, `FINNHUB_API_KEY`
 
 ## Architecture
 
-### GitHub Actions Workflow (`.github/workflows/openclaw.yml`)
-- Triggers: cron every 6 hours + manual `workflow_dispatch` with optional message
-- Installs OpenClaw globally, spins up a gateway on port 18789, runs the agent, syncs memory back to the repo, then auto-commits with `[skip ci]`
-- Concurrency: single queue, never cancels in-progress runs
-- Timeout: 15 minutes for the agent step
+### GitHub Actions Workflows
 
-### Memory System (`memory/`)
-Markdown files persisted via git between runs. The agent reads these on startup to restore context.
+| Workflow | File | Schedule |
+|----------|------|----------|
+| Stock Picker | `.github/workflows/openclaw.yml` | Every 6 hours |
+| Portfolio Advisor | `.github/workflows/portfolio-advisor.yml` | Weekly (Sunday midnight UTC) |
+
+Both workflows: install OpenClaw globally, spin up a gateway on port 18789, run the agent, sync memory back to the repo, then auto-commit with `[skip ci]`.
+
+### Memory System
+
+#### Stock Picker (`memory/`)
+Markdown files persisted via git between runs.
 
 | File | Purpose |
 |------|---------|
@@ -55,18 +62,32 @@ Markdown files persisted via git between runs. The agent reads these on startup 
 | `HEARTBEAT.md` | Periodic task config (empty = no recurring tasks) |
 | `memory/YYYY-MM-DD.md` | Daily session logs |
 
-### Skills (`memory/skills/`)
-Reusable knowledge modules loaded by the agent:
+#### Portfolio Advisor (`memory/portfolio-advisor/`)
+| File | Purpose |
+|------|---------|
+| `SOUL.md` | Portfolio philosophy (diversification, risk management, long-term focus) |
+| `AGENTS.md` | Portfolio review, allocation, and performance workflows |
+| `MEMORY.md` | Current holdings, target allocation, trade log |
+| `USER.md` | User risk profile template (to be customized) |
 
-- **`stock-picker/`** — 5-phase investment analysis workflow (data freshness → screen → deep dive → risk scoring → recommendation) using 4 investor methodologies
-- **`live-pricing/`** — Finnhub API wrapper with implementations in JS, Python, and shell
+### Skills (`memory/skills/`)
+Reusable knowledge modules loaded by the agents:
+
+| Skill | Used By | Purpose |
+|-------|---------|---------|
+| `stock-picker` | Both | 5-phase investment analysis (Buffett/Lynch/Druckenmiller/Simons) |
+| `live-pricing` | Both | Finnhub API wrapper (JS, Python, shell) |
+| `quant-portfolio-optimization` | portfolio-advisor | Markowitz, Kelly, Black-Litterman allocation |
+| `quant-risk-metrics` | portfolio-advisor | VaR, max drawdown, factor exposure |
+| `backtesting` | portfolio-advisor | Validate allocation strategies |
+| `quant-performance-metrics` | portfolio-advisor | Sharpe, alpha, beta tracking |
 
 ### Configuration (`config/openclaw.json.template`)
-Defines the OpenClaw gateway: 8 Qwen/MiniMax/GLM/Kimi model options, Gemini web search tool, gateway on localhost:18789. The setup script fills in API keys from env vars.
+Defines both agents in `agents.list`, 8 model options, Gemini web search, gateway on localhost:18789. The setup script fills in API keys from env vars.
 
 ## Key Patterns
 
 - **Memory commits use `[skip ci]`** — prevents infinite workflow loops when the agent pushes updated memory
 - **Input sanitization** — the workflow strips backticks, `$`, and `\` from user messages before passing to the agent
-- **Session ID** — always `stock-picker`; changing this loses workspace context
+- **Session IDs** — `stock-picker` or `portfolio-advisor`; changing loses workspace context
 - **Thinking mode** — `--thinking high` is required for quality analysis; don't remove it
