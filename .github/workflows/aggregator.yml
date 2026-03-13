@@ -25,7 +25,7 @@ jobs:
       default-message: 'Aggregate research queue and update priority ideas'
       workspace-name: workspace-aggregator
       memory-path: memory/aggregator
-      additional-sync-paths: 'memory/sector-researcher/signals/queue.md memory/sector-researcher/signals-queue.json memory/sector-researcher/priority-ideas.md memory/sector-researcher/market-conditions.md
+      additional-sync-paths: 'memory/sector-researcher/research-queue.md memory/sector-researcher/market-conditions.md'
       commit-message: 'chore: update aggregator memory [skip ci]'
       commit-user-name: 'OpenClaw Agent'
       commit-user-email: 'openclaw@users.noreply.github.com'
