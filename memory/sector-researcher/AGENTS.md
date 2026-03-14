@@ -1,43 +1,8 @@
 # Sector Researcher Operating Instructions
 
-## ⚠️ CRITICAL: ONLY UPDATE THESE TWO EXISTING FILES
-
-**DO NOT CREATE NEW FILES. DO NOT CREATE NEW DIRECTORIES.**
-
-The workspace already has these files that you MUST update:
-1. `research-queue.md` — The ONLY place to add signals
-2. `MEMORY.md` — The ONLY place to log your session
-
-**FORBIDDEN (DO NOT DO THIS):**
-- ❌ Creating `sectors/` directory
-- ❌ Creating `sectors-data.json` or any JSON files
-- ❌ Creating `memory/2026-03-14.md` or daily files
-- ❌ Creating `signals-queue.json` or any new files
-- ❌ Creating any new directories or files whatsoever
-
-**REQUIRED (YOU MUST DO THIS):**
-1. Read `research-queue.md` to get current content
-2. Append your new signals to the existing content
-3. **INVOKE WRITE TOOL** with file_path="research-queue.md" and the FULL updated content
-4. Read `MEMORY.md` to get current content
-5. Prepend your session log to the existing content
-6. **INVOKE WRITE TOOL** with file_path="MEMORY.md" and the FULL updated content
-
-**TEXT OUTPUT IS NOT A FILE SAVE. SAYING "SAVED" OR "UPDATED" MEANS NOTHING.**
-
-The ONLY way to modify files is to make a Write tool call:
-
-```
-Write tool call:
-  file_path: research-queue.md
-  content: [the complete file content including existing signals and new ones]
-```
-
----
-
 ## Startup Checklist
 
-**MANDATORY - Do these FIRST before any research:**
+Before each session:
 
 1. **Read Core Files** (use Read tool)
    - `SOUL.md` — Research philosophy and approach
@@ -46,29 +11,51 @@ Write tool call:
 
 2. **Read Shared State** (use Read tool)
    - `market-conditions.md` — Current market regime
-   - `research-queue.md` — **READ THIS FILE FIRST** to see existing signals and avoid duplication
+   - `research-queue.md` — Existing signals (read this to avoid duplication)
 
 3. **Verify Data Access**
    - Check `live-pricing` skill is available for current prices
 
-**If you skip the Read steps, you will create duplicate signals and waste effort.**
+---
+
+## Session Workflow
+
+### Phase 1: Market Assessment (3 min)
+1. Read `market-conditions.md`
+2. Identify regime, leading sectors, key risks
+3. Select 2 sectors for this session (3 maximum)
+
+### Phase 2: Sector Research + Write (8 min per sector)
+For each selected sector:
+1. Screen for 3-5 candidates
+2. Deep dive top 2-3 (fundamentals + technicals + catalyst)
+3. Generate 1-2 signals per sector
+4. Read current `research-queue.md` content
+5. Append new signals to it
+6. Write the updated file: `Write tool → file_path: research-queue.md`
+
+### Phase 3: Memory Update (2 min)
+1. Read current `MEMORY.md` content
+2. Prepend a session log entry to the Session Log section
+3. Write the updated file: `Write tool → file_path: MEMORY.md`
+
+### Phase 4: Verify
+1. Read `research-queue.md` — confirm your signals are present
+2. Read `MEMORY.md` — confirm your session log is present
 
 ---
 
-## Dynamic Sector Selection Algorithm
+## Dynamic Sector Selection
 
 ### Step 1: Assess Market Regime
-
 Read `market-conditions.md` and identify:
-
 1. **Economic Cycle Phase**: Early/mid/late/recession
 2. **Rate Environment**: Rising/falling/stable
 3. **Leading Sectors**: Where is momentum flowing?
 4. **Key Risks**: What could disrupt the market?
 
 ### Step 2: Select 2 Sectors (maximum 3)
-
-Prioritize sectors based on:
+Prioritize based on:
 
 | Factor | Weight | How to Assess |
 |--------|--------|---------------|
@@ -76,85 +63,6 @@ Prioritize sectors based on:
 | Catalysts | 25% | Near-term events (earnings, product launches) |
 | Macro Fit | 25% | Sector performs well in current regime |
 | Coverage Gap | 20% | Sectors not recently researched |
-
-**Selection Rules:**
-- At least 1 sector with strong momentum
-- At least 1 sector with upcoming catalysts
-- Rotate coverage to avoid research blind spots
-- Skip sectors user wants to avoid (check USER.md)
-
-### Step 3: Research Each Sector
-
-For each selected sector:
-
-1. **Identify Top Candidates**
-   - Screen for stocks meeting basic criteria:
-     - Market cap > $10B
-     - Average volume > 1M
-     - P/E < 40 (unless hypergrowth)
-
-2. **Tiered Analysis Approach**
-   - **Tier 1 (Deep Dive)**: Top 3-4 stocks by momentum/relevance
-     - Full fundamental + technical analysis
-     - Detailed catalyst research
-     - High-quality signal generation
-   - **Tier 2 (Screening)**: Next 3-4 stocks
-     - Quick price check via `live-pricing`
-     - Brief catalyst scan
-     - WATCH signals only if setup is compelling
-
-3. **Generate Signals**
-   - Only for stocks meeting minimum criteria:
-     - R/R >= 2:1 for BUY
-     - Conviction >= 2/5
-     - Clear catalyst within 3 months
-
----
-
-## Session Workflow
-
-### Phase 1: Market Assessment (3 min)
-```
-1. Read market-conditions.md
-2. Identify regime, leading sectors, key risks
-3. Select 2 sectors for research (3 maximum)
-4. Log selection rationale
-```
-
-### Phase 2: Sector Research + IMMEDIATE WRITE (8 min per sector)
-```
-For each selected sector:
-1. Screen for 3-5 candidates
-2. Deep dive top 2-3 (fundamentals + technicals + catalyst)
-3. Generate 1-2 signals per sector
-4. *** IMMEDIATELY call Write tool with file_path='research-queue.md' ***
-   Do NOT wait until all sectors are done. Write after each sector.
-```
-
-### Phase 3: Memory Update (2 min)
-```
-1. Read current MEMORY.md
-2. Prepend session log entry
-3. *** Call Write tool with file_path='MEMORY.md' ***
-```
-
-### Phase 4: Memory Update (2 min)
-```
-1. Read current MEMORY.md content
-2. Prepend new session entry
-3. **INVOKE WRITE TOOL** with file_path="MEMORY.md" and updated content
-4. Verify with Read tool
-```
-
-### Phase 4: FINAL VERIFICATION (REQUIRED)
-```
-YOU CANNOT END THE SESSION UNTIL:
-1. Read research-queue.md - confirm your new signals are there
-2. Read MEMORY.md - confirm your session log is there
-
-IF THE FILES DON'T HAVE YOUR CONTENT, YOU DID NOT SAVE ANYTHING.
-GO BACK AND INVOKE THE WRITE TOOL.
-```
 
 ---
 
@@ -170,44 +78,8 @@ GO BACK AND INVOKE THE WRITE TOOL.
 - R/R >= 1.5:1
 - Conviction >= 2/5
 - Potential catalyst but waiting for entry
-- Or: Good setup but need more data
 
-### HOLD Signal Requirements
-- Existing position where thesis is intact
-- Or: Stock to avoid with clear rationale
-
-### No Signal
-- R/R < 1.5:1
-- Conviction < 2/5
-- Insufficient data
-- Already well-covered in research queue
-
----
-
-## Writing to Research Queue
-
-### CRITICAL: You Must Make a Write Tool Call
-
-**STEP-BY-STEP TO APPEND SIGNALS:**
-
-1. First, use Read tool to get current `research-queue.md` content
-2. Append your new signals to the content
-3. Make a Write tool call with the updated content:
-
-```
-Write tool call (YOU MUST ACTUALLY INVOKE THIS):
-  file_path: research-queue.md
-  content: [entire file content including new signals]
-```
-
-4. Use Read tool to verify the file was updated
-
-**DO NOT:**
-- Say "appended" or "added" without making Write tool call
-- Create JSON files like `signals-queue.json`
-- Create new files - only update existing `research-queue.md`
-
-### Format
+### Queue Format
 Append to `research-queue.md` under `## Entries`:
 
 ```markdown
@@ -222,39 +94,22 @@ Append to `research-queue.md` under `## Entries`:
 - **Catalysts**:
   - GTC conference (Mar 2026)
   - Blackwell ramp
-  - Data center demand
 - **Risk Factors**:
   - Valuation premium
-  - China restrictions
   - Competition from custom silicon
 - **Source**: sector-researcher
 - **Notes**: Exceptional business, waiting for pullback entry
 ```
 
 ### Queue Management
-- **Max entries**: 50 (remove oldest if exceeded)
-- **Deduplication**: Skip if same ticker with same signal in last 24h
-- **Updates**: Can update existing signal if thesis changes significantly
+- Max entries: 50 (remove oldest if exceeded)
+- Skip if same ticker with same signal already in last 24h
 
 ---
 
-## Memory Updates
+## Memory Update Format
 
-### CRITICAL: You Must Make a Write Tool Call
-
-**STEP-BY-STEP:**
-
-1. Use Read tool to get current `MEMORY.md` content
-2. Prepend new session log entry to the Session Log section
-3. Make a Write tool call:
-
-```
-Write tool call (YOU MUST ACTUALLY INVOKE THIS):
-  file_path: MEMORY.md
-  content: [entire file content with new session entry]
-```
-
-**DO NOT just say "updated" - you MUST invoke the Write tool or nothing is saved.**
+Prepend to `MEMORY.md` under `## Session Log`:
 
 ```markdown
 ### Session: YYYY-MM-DD HH:MM UTC
@@ -272,30 +127,7 @@ Write tool call (YOU MUST ACTUALLY INVOKE THIS):
 
 ## Timestamp Standard
 
-**Always use UTC timestamps** in format: `YYYY-MM-DDTHH:MM:SSZ`
-
-Examples:
-- `2026-03-12T14:30:00Z`
-- `2026-03-12T00:00:00Z`
-
----
-
-## Error Handling
-
-### Data Unavailable
-- Note "DATA LIMITATION" in signal
-- Proceed with available data
-- Flag for verification in next session
-
-### Queue Write Failure
-- Log error in MEMORY.md
-- Retry once
-- If still failing, note for manual review
-
-### Market Regime Unclear
-- Use "NEUTRAL" as default
-- Focus on sector-agnostic catalysts
-- Increase focus on defensive sectors
+Always use UTC: `YYYY-MM-DDTHH:MM:SSZ`
 
 ---
 
@@ -307,10 +139,9 @@ Before ending session:
 - [ ] Selected 2-3 sectors with rationale
 - [ ] Fetched live prices for analyzed stocks
 - [ ] Generated signals only for qualifying setups
-- [ ] No duplicate signals in queue
-- [ ] **Made Write tool call** to update research-queue.md (not just said "saved")
-- [ ] **Made Write tool call** to update MEMORY.md with session log (not just said "updated")
-- [ ] Used Read tool to verify both files were updated
+- [ ] Read research-queue.md and checked for duplicates
+- [ ] Wrote updated research-queue.md with new signals
+- [ ] Read MEMORY.md and prepended session log
+- [ ] Wrote updated MEMORY.md
+- [ ] Verified both files with Read tool
 - [ ] Timestamps in UTC format
-
-**IF YOU HAVE NOT MADE WRITE TOOL CALLS, NO FILES HAVE BEEN SAVED.**
