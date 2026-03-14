@@ -22,7 +22,7 @@ jobs:
     uses: ./.github/workflows/_agent-template.yml
     with:
       session-id: sector-researcher
-      default-message: 'Research current sectors and add signals to queue'
+      default-message: 'Research 2-3 sectors and add signals to queue. After each sector, call the Write tool with file_path=research-queue.md to save signals immediately — do not wait until the end. Then call Write tool with file_path=MEMORY.md to log the session.'
       workspace-name: workspace-sector-researcher
       memory-path: memory/sector-researcher
       additional-sync-paths: 'memory/aggregator/priority-ideas.md memory/aggregator/market-conditions.md'

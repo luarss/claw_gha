@@ -60,7 +60,7 @@
         "id": "sector-researcher",
         "name": "Sector Researcher",
         "workspace": "$HOME/.openclaw/workspace-sector-researcher",
-        "model": { "primary": "bailian/qwen3-max-2026-01-23" },
+        "model": { "primary": "bailian/qwen3.5-plus" },
         "tools": { "profile": "full" },
         "subagents": { "allowAgents": ["*"] }
       },

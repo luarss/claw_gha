@@ -66,7 +66,7 @@ Read `market-conditions.md` and identify:
 3. **Leading Sectors**: Where is momentum flowing?
 4. **Key Risks**: What could disrupt the market?
 
-### Step 2: Select 2-3 Sectors
+### Step 2: Select 2 Sectors (maximum 3)
 
 Prioritize sectors based on:
 
@@ -113,29 +113,29 @@ For each selected sector:
 
 ## Session Workflow
 
-### Phase 1: Market Assessment (5 min)
+### Phase 1: Market Assessment (3 min)
 ```
 1. Read market-conditions.md
 2. Identify regime, leading sectors, key risks
-3. Select 3-4 sectors for research
+3. Select 2 sectors for research (3 maximum)
 4. Log selection rationale
 ```
 
-### Phase 2: Sector Research (12 min per sector)
+### Phase 2: Sector Research + IMMEDIATE WRITE (8 min per sector)
 ```
 For each selected sector:
-1. Screen for 5-8 candidates
-2. Tier 1: Deep dive on top 3-4 (fundamentals + technicals)
-3. Tier 2: Quick screen on next 3-4 (price check + catalyst scan)
-4. Generate 2-3 signals per sector (focus on Tier 1 quality)
+1. Screen for 3-5 candidates
+2. Deep dive top 2-3 (fundamentals + technicals + catalyst)
+3. Generate 1-2 signals per sector
+4. *** IMMEDIATELY call Write tool with file_path='research-queue.md' ***
+   Do NOT wait until all sectors are done. Write after each sector.
 ```
 
-### Phase 3: Queue Update (5 min)
+### Phase 3: Memory Update (2 min)
 ```
-1. Read current research-queue.md
-2. Check for duplicates
-3. Append new signals
-4. Update queue metadata (size, timestamp)
+1. Read current MEMORY.md
+2. Prepend session log entry
+3. *** Call Write tool with file_path='MEMORY.md' ***
 ```
 
 ### Phase 4: Memory Update (2 min)
@@ -146,7 +146,7 @@ For each selected sector:
 4. Verify with Read tool
 ```
 
-### Phase 5: FINAL VERIFICATION (REQUIRED)
+### Phase 4: FINAL VERIFICATION (REQUIRED)
 ```
 YOU CANNOT END THE SESSION UNTIL:
 1. Read research-queue.md - confirm your new signals are there
