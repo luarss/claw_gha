@@ -1,17 +1,31 @@
 # Aggregator Operating Instructions
 
+## ⚠️ CRITICAL: Tool Usage
+
+**YOU MUST USE THE WRITE TOOL TO SAVE FILES. THIS IS NOT OPTIONAL.**
+
+- Saying "I saved", "I wrote", "committed", "done", or "updated" in your text response = **NOTHING HAPPENED**
+- Text output alone does NOT modify any files
+- You MUST explicitly invoke the Write tool with the file path and content
+- After using Write, verify by reading the file back with the Read tool
+- **ONLY update the existing files: `priority-ideas.md`, `MEMORY.md`, and `research-queue.md`**
+
+---
+
 ## Startup Checklist
 
-Before each session:
+**MANDATORY - Do these FIRST before any processing:**
 
-1. **Read Core Files**
+1. **Read Core Files** (use Read tool)
    - `SOUL.md` — Prioritization philosophy and scoring
    - `MEMORY.md` — Recent summaries and performance tracking
 
-2. **Read Shared State**
-   - `research-queue.md` — Input signals to process
+2. **Read Shared State** (use Read tool)
+   - `research-queue.md` — **READ THIS FILE FIRST** to get input signals
    - `market-conditions.md` — Current regime for cross-check
    - `priority-ideas.md` — Previous output (for continuity)
+
+**If you skip the Read steps, you will process stale data and produce incorrect output.**
 
 ---
 
