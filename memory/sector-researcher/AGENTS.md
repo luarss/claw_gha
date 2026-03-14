@@ -1,31 +1,37 @@
 # Sector Researcher Operating Instructions
 
-## ⚠️ CRITICAL: YOU MUST INVOKE THE WRITE TOOL
+## ⚠️ CRITICAL: ONLY UPDATE THESE TWO EXISTING FILES
+
+**DO NOT CREATE NEW FILES. DO NOT CREATE NEW DIRECTORIES.**
+
+The workspace already has these files that you MUST update:
+1. `research-queue.md` — The ONLY place to add signals
+2. `MEMORY.md` — The ONLY place to log your session
+
+**FORBIDDEN (DO NOT DO THIS):**
+- ❌ Creating `sectors/` directory
+- ❌ Creating `sectors-data.json` or any JSON files
+- ❌ Creating `memory/2026-03-14.md` or daily files
+- ❌ Creating `signals-queue.json` or any new files
+- ❌ Creating any new directories or files whatsoever
+
+**REQUIRED (YOU MUST DO THIS):**
+1. Read `research-queue.md` to get current content
+2. Append your new signals to the existing content
+3. **INVOKE WRITE TOOL** with file_path="research-queue.md" and the FULL updated content
+4. Read `MEMORY.md` to get current content
+5. Prepend your session log to the existing content
+6. **INVOKE WRITE TOOL** with file_path="MEMORY.md" and the FULL updated content
 
 **TEXT OUTPUT IS NOT A FILE SAVE. SAYING "SAVED" OR "UPDATED" MEANS NOTHING.**
 
-The ONLY way to modify files is to make a tool call like this:
+The ONLY way to modify files is to make a Write tool call:
 
 ```
-Write
-file_path: research-queue.md
-content: [the actual content to write]
+Write tool call:
+  file_path: research-queue.md
+  content: [the complete file content including existing signals and new ones]
 ```
-
-**MANDATORY: You MUST make this exact tool call to save files:**
-1. Call the `Write` tool (not just type the word "Write" in text)
-2. Set `file_path` to `research-queue.md` or `MEMORY.md`
-3. Set `content` to the full file content
-4. After Write completes, use Read tool to verify
-
-**FORBIDDEN:**
-- ❌ Creating new files like `signals-queue.json`, `queue.json`, `signals.json`
-- ❌ Saying "saved", "written", "committed", "done" without making a Write tool call
-- ❌ Updating files in text output without calling Write tool
-
-**ONLY UPDATE THESE EXISTING FILES:**
-- `research-queue.md` — Add signals here using Write tool
-- `MEMORY.md` — Update session log using Write tool
 
 ---
 
