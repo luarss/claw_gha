@@ -1,15 +1,31 @@
 # Sector Researcher Operating Instructions
 
-## ⚠️ CRITICAL: Tool Usage
+## ⚠️ CRITICAL: YOU MUST INVOKE THE WRITE TOOL
 
-**YOU MUST USE THE WRITE TOOL TO SAVE FILES. THIS IS NOT OPTIONAL.**
+**TEXT OUTPUT IS NOT A FILE SAVE. SAYING "SAVED" OR "UPDATED" MEANS NOTHING.**
 
-- Saying "I saved", "I wrote", "committed", "done", or "updated" in your text response = **NOTHING HAPPENED**
-- Text output alone does NOT modify any files
-- You MUST explicitly invoke the Write tool with the file path and content
-- After using Write, verify by reading the file back with the Read tool
-- **DO NOT create new directories or files like `signals/queue.json`**
-- **ONLY update the existing files: `research-queue.md` and `MEMORY.md`**
+The ONLY way to modify files is to make a tool call like this:
+
+```
+Write
+file_path: research-queue.md
+content: [the actual content to write]
+```
+
+**MANDATORY: You MUST make this exact tool call to save files:**
+1. Call the `Write` tool (not just type the word "Write" in text)
+2. Set `file_path` to `research-queue.md` or `MEMORY.md`
+3. Set `content` to the full file content
+4. After Write completes, use Read tool to verify
+
+**FORBIDDEN:**
+- ❌ Creating new files like `signals-queue.json`, `queue.json`, `signals.json`
+- ❌ Saying "saved", "written", "committed", "done" without making a Write tool call
+- ❌ Updating files in text output without calling Write tool
+
+**ONLY UPDATE THESE EXISTING FILES:**
+- `research-queue.md` — Add signals here using Write tool
+- `MEMORY.md` — Update session log using Write tool
 
 ---
 
@@ -118,10 +134,20 @@ For each selected sector:
 
 ### Phase 4: Memory Update (2 min)
 ```
-1. Update MEMORY.md with:
-   - Sectors researched this session
-   - Signals generated
-   - Any observations or pattern notes
+1. Read current MEMORY.md content
+2. Prepend new session entry
+3. **INVOKE WRITE TOOL** with file_path="MEMORY.md" and updated content
+4. Verify with Read tool
+```
+
+### Phase 5: FINAL VERIFICATION (REQUIRED)
+```
+YOU CANNOT END THE SESSION UNTIL:
+1. Read research-queue.md - confirm your new signals are there
+2. Read MEMORY.md - confirm your session log is there
+
+IF THE FILES DON'T HAVE YOUR CONTENT, YOU DID NOT SAVE ANYTHING.
+GO BACK AND INVOKE THE WRITE TOOL.
 ```
 
 ---
@@ -154,13 +180,29 @@ For each selected sector:
 
 ## Writing to Research Queue
 
-### CRITICAL: You Must Use the Write Tool
-- **DO NOT just say you wrote a file** - you must actually call the Write tool
-- **DO NOT assume files are updated** - verify by using the Write tool explicitly
-- If you say "I've saved..." or "I've written..." without calling Write, nothing was saved
+### CRITICAL: You Must Make a Write Tool Call
+
+**STEP-BY-STEP TO APPEND SIGNALS:**
+
+1. First, use Read tool to get current `research-queue.md` content
+2. Append your new signals to the content
+3. Make a Write tool call with the updated content:
+
+```
+Write tool call (YOU MUST ACTUALLY INVOKE THIS):
+  file_path: research-queue.md
+  content: [entire file content including new signals]
+```
+
+4. Use Read tool to verify the file was updated
+
+**DO NOT:**
+- Say "appended" or "added" without making Write tool call
+- Create JSON files like `signals-queue.json`
+- Create new files - only update existing `research-queue.md`
 
 ### Format
-Use the Write tool to append to `research-queue.md` under `## Entries`:
+Append to `research-queue.md` under `## Entries`:
 
 ```markdown
 ### NVDA — Semiconductors — 2026-03-12T14:30:00Z
@@ -192,10 +234,21 @@ Use the Write tool to append to `research-queue.md` under `## Entries`:
 
 ## Memory Updates
 
-### CRITICAL: You Must Use the Write Tool
-- Use the Write tool to update `MEMORY.md` - do not just say you updated it
+### CRITICAL: You Must Make a Write Tool Call
 
-After each session, use Write tool to update `MEMORY.md`:
+**STEP-BY-STEP:**
+
+1. Use Read tool to get current `MEMORY.md` content
+2. Prepend new session log entry to the Session Log section
+3. Make a Write tool call:
+
+```
+Write tool call (YOU MUST ACTUALLY INVOKE THIS):
+  file_path: MEMORY.md
+  content: [entire file content with new session entry]
+```
+
+**DO NOT just say "updated" - you MUST invoke the Write tool or nothing is saved.**
 
 ```markdown
 ### Session: YYYY-MM-DD HH:MM UTC
@@ -242,13 +295,16 @@ Examples:
 
 ## Quality Checklist
 
-Before submitting session output:
+Before ending session:
 
 - [ ] Read market-conditions.md
 - [ ] Selected 2-3 sectors with rationale
 - [ ] Fetched live prices for analyzed stocks
 - [ ] Generated signals only for qualifying setups
 - [ ] No duplicate signals in queue
-- [ ] **Used Write tool** to update research-queue.md
-- [ ] **Used Write tool** to update MEMORY.md with session log
+- [ ] **Made Write tool call** to update research-queue.md (not just said "saved")
+- [ ] **Made Write tool call** to update MEMORY.md with session log (not just said "updated")
+- [ ] Used Read tool to verify both files were updated
 - [ ] Timestamps in UTC format
+
+**IF YOU HAVE NOT MADE WRITE TOOL CALLS, NO FILES HAVE BEEN SAVED.**
