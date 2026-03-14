@@ -29,4 +29,5 @@ jobs:
       commit-user-name: 'Portfolio Advisor Agent'
       commit-user-email: 'portfolio-advisor@users.noreply.github.com'
       otel-service-name: openclaw-portfolio-advisor-gha
+      thinking: high
     secrets: inherit

@@ -31,6 +31,11 @@ on:
       otel-service-name:
         required: true
         type: string
+      thinking:
+        required: false
+        type: string
+        default: ''
+        description: 'Thinking level: high, medium, low, or empty for none'
 
 env:
   FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
@@ -179,7 +184,11 @@ jobs:
           FINNHUB_API_KEY: ${{ secrets.FINNHUB_API_KEY }}
           FINANCIALDATA_API_KEY: ${{ secrets.FINANCIALDATA_API_KEY }}
         run: |
-          openclaw agent --session-id ${{ inputs.session-id }} --message "$MESSAGE" --thinking high
+          THINKING_FLAG=""
+          if [ -n "${{ inputs.thinking }}" ]; then
+            THINKING_FLAG="--thinking ${{ inputs.thinking }}"
+          fi
+          openclaw agent --session-id ${{ inputs.session-id }} --message "$MESSAGE" $THINKING_FLAG
 
       - name: Enforce File Writes
         timeout-minutes: 5
@@ -194,9 +203,13 @@ jobs:
           changed=$(diff -rq --exclude='.gitkeep' "$MEMORY" "$WORKSPACE" 2>/dev/null | wc -l)
           if [ "$changed" -eq 0 ]; then
             echo "Agent produced no file changes — sending write-enforcement follow-up..."
+            THINKING_FLAG=""
+            if [ -n "${{ inputs.thinking }}" ]; then
+              THINKING_FLAG="--thinking ${{ inputs.thinking }}"
+            fi
             openclaw agent --session-id ${{ inputs.session-id }} \
               --message "STOP. You have NOT written any files yet. You MUST now call the Write tool. Step 1: call Write tool with file_path='research-queue.md' containing all the signals you just researched. Step 2: call Write tool with file_path='MEMORY.md' with a session log prepended to the existing content. Invoking Write tool is the ONLY way to save. Do it now." \
-              --thinking high
+              $THINKING_FLAG
           else
             echo "Agent produced $changed file change(s) — skipping write enforcement."
           fi
