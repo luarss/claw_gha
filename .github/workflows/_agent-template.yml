@@ -75,13 +75,14 @@ jobs:
         run: npx playwright install chromium
 
       - name: Install Skills from ClawHub
+        continue-on-error: true
         env:
           CLAWHUB_API_KEY: ${{ secrets.CLAWHUB_API_KEY }}
         run: |
           if [ -n "$CLAWHUB_API_KEY" ]; then
-            npx clawhub@latest login --no-browser --token "$CLAWHUB_API_KEY"
+            npx clawhub@latest login --no-browser --token "$CLAWHUB_API_KEY" || echo "ClawHub login failed, continuing without skills"
           fi
-          npx clawhub@latest install self-improving-agent
+          npx clawhub@latest install self-improving-agent || echo "ClawHub install failed, continuing without skills"
 
       - name: Sanitize Input
         env:
