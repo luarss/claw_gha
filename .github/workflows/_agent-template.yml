@@ -56,7 +56,7 @@ jobs:
             ~/.npm-global
             ~/.cache/ms-playwright
           # Bump v2 → v3 etc. when a new openclaw version must be forced
-          key: deps-${{ runner.os }}-v2-${{ hashFiles('.github/workflows/_agent-template.yml') }}
+          key: deps-${{ runner.os }}-v3-${{ hashFiles('.github/workflows/_agent-template.yml') }}
 
       - name: Install OpenClaw
         run: |
