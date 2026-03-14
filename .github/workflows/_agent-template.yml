@@ -100,19 +100,28 @@ jobs:
           GATEWAY_PORT: 18789
         run: |
           mkdir -p ~/.openclaw/${{ inputs.workspace-name }}
+          echo "=== Copying memory files to workspace ==="
+          echo "Source: ${{ inputs.memory-path }}"
+          echo "Dest: ~/.openclaw/${{ inputs.workspace-name }}"
           if [ -d "${{ inputs.memory-path }}" ] && [ "$(ls -A ${{ inputs.memory-path }} 2>/dev/null)" ]; then
-            cp -r ${{ inputs.memory-path }}/* ~/.openclaw/${{ inputs.workspace-name }}/
+            cp -rv ${{ inputs.memory-path }}/* ~/.openclaw/${{ inputs.workspace-name }}/
+            echo "=== Files copied successfully ==="
           else
-            echo "Warning: No memory files to sync"
+            echo "Warning: No memory files to sync - directory empty or missing"
           fi
           # Copy additional sync paths to workspace
           for path in ${{ inputs.additional-sync-paths }}; do
             if [ -f "$path" ]; then
+              echo "Copying additional file: $path"
               cp "$path" ~/.openclaw/${{ inputs.workspace-name }}/
             elif [ -d "$path" ]; then
+              echo "Copying additional dir: $path"
               cp -r "$path" ~/.openclaw/${{ inputs.workspace-name }}/
             fi
           done
+          # Verify workspace contents
+          echo "=== Workspace contents after copy ==="
+          ls -la ~/.openclaw/${{ inputs.workspace-name }}/
           export HOME
           envsubst < config/openclaw.json.template > ~/.openclaw/openclaw.json
 
@@ -184,6 +193,23 @@ jobs:
           echo ""
           echo "=== GIT DIFF (memory path) ==="
           git diff ${{ inputs.memory-path }}/ || echo "No diff"
+
+      - name: Verify and Force Update
+        run: |
+          # Check if MEMORY.md exists and has been updated
+          MEMORY_FILE="${{ inputs.memory-path }}/MEMORY.md"
+          if [ -f "$MEMORY_FILE" ]; then
+            # Add timestamp to force a change if the agent updated the file
+            echo "" >> "$MEMORY_FILE"
+            echo "<!-- Last run: $(date -u +%Y-%m-%dT%H:%M:%SZ) -->" >> "$MEMORY_FILE"
+            echo "Updated MEMORY.md with timestamp"
+          else
+            echo "Warning: MEMORY.md not found at $MEMORY_FILE"
+          fi
+
+          # List what files exist in the memory path
+          echo "=== Files in memory path after agent run ==="
+          find ${{ inputs.memory-path }}/ -type f -name "*.md" 2>/dev/null || echo "No .md files found"
 
       - name: Commit Memory Changes
         if: github.ref == 'refs/heads/main'

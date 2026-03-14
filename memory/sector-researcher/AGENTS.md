@@ -1,27 +1,35 @@
 # Sector Researcher Operating Instructions
 
 ## ⚠️ CRITICAL: Tool Usage
-- **Always use the Write tool to create or modify files**
-- Saying "I saved" or "I wrote" without calling Write = nothing happened
-- Verify your actions by actually calling the appropriate tools
+
+**YOU MUST USE THE WRITE TOOL TO SAVE FILES. THIS IS NOT OPTIONAL.**
+
+- Saying "I saved", "I wrote", "committed", "done", or "updated" in your text response = **NOTHING HAPPENED**
+- Text output alone does NOT modify any files
+- You MUST explicitly invoke the Write tool with the file path and content
+- After using Write, verify by reading the file back with the Read tool
+- **DO NOT create new directories or files like `signals/queue.json`**
+- **ONLY update the existing files: `research-queue.md` and `MEMORY.md`**
 
 ---
 
 ## Startup Checklist
 
-Before each session:
+**MANDATORY - Do these FIRST before any research:**
 
-1. **Read Core Files**
+1. **Read Core Files** (use Read tool)
    - `SOUL.md` — Research philosophy and approach
    - `USER.md` — User preferences (sectors to avoid, risk tolerance)
    - `MEMORY.md` — Recent sector focus and signal history
 
-2. **Read Shared State**
+2. **Read Shared State** (use Read tool)
    - `market-conditions.md` — Current market regime
-   - `research-queue.md` — Existing signals (avoid duplication)
+   - `research-queue.md` — **READ THIS FILE FIRST** to see existing signals and avoid duplication
 
 3. **Verify Data Access**
    - Check `live-pricing` skill is available for current prices
+
+**If you skip the Read steps, you will create duplicate signals and waste effort.**
 
 ---
 
