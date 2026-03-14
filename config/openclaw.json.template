@@ -60,16 +60,13 @@
         "id": "sector-researcher",
         "name": "Sector Researcher",
         "workspace": "$HOME/.openclaw/workspace-sector-researcher",
-        "model": { "primary": "bailian/qwen3.5-plus" },
-        "tools": { "profile": "full" },
-        "subagents": { "allowAgents": ["*"] }
+        "model": { "primary": "bailian/qwen3.5-plus" }
       },
       {
         "id": "aggregator",
         "name": "Aggregator",
         "workspace": "$HOME/.openclaw/workspace-aggregator",
-        "model": { "primary": "bailian/glm-5" },
-        "subagents": { "allowAgents": ["*"] }
+        "model": { "primary": "bailian/glm-5" }
       }
     ]
   },
